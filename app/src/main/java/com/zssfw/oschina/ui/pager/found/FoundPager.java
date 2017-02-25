@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.zssfw.oschina.MyApplication;
 import com.zssfw.oschina.R;
 import com.zssfw.oschina.ui.act.FoundShowActivity;
+import com.zssfw.oschina.ui.pager.found.activity.FoundSearchFriendActivity;
 import com.zssfw.oschina.ui.pager.found.fragment.OSSoftwareFragment;
 import com.zssfw.oschina.ui.pager.found.fragment.ShakeFragment;
 import com.zssfw.oschina.ui.pager.plus.BaseFragment;
@@ -77,6 +78,9 @@ public class FoundPager extends BaseFragment {
                 break;
             case R.id.ll_found_finduser:
                 Toast.makeText(MyApplication.mContent, "搜索好友", Toast.LENGTH_SHORT).show();
+                intent = new Intent(MyApplication.mContent, FoundSearchFriendActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
                 break;
             case R.id.ll_found_nearfriend:
                 Toast.makeText(MyApplication.mContent, "附近程序员", Toast.LENGTH_SHORT).show();
