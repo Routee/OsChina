@@ -1,5 +1,8 @@
 package com.zssfw.oschina.manager;
 
+import java.io.IOException;
+
+import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -38,8 +41,25 @@ public class HttpManager {
         }
     }
 
-    public String dataPost(String url) {
+    public String dataPost(String url,String username,String password) {
 
-        return null;
+        OkHttpClient okHttpClient = new OkHttpClient.Builder().build();
+        FormBody body = new FormBody.Builder()
+                .add("keep_login","1")
+                .add("username",username)
+                .add("pwd",password)
+                .build();
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+        Response response = null;
+        try {
+            response = okHttpClient.newCall(request).execute();
+            return response.body().string();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:imagecontrol="http://schemas.android.com/apk/res-auto"
+              android:id="@+id/ll_login_false"
+              android:layout_width="match_parent"
+              android:background="@mipmap/bg_my"
+              android:gravity="center"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <com.zssfw.oschina.ui.widget.RoundImageView
+        android:id="@+id/iv_head_photo"
+        android:layout_centerInParent="true"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@mipmap/widget_dface"
+        imagecontrol:border_outside_color="#fff"
+        imagecontrol:border_inside_color="#fff"
+        imagecontrol:border_thickness="1dp"
+        />
+
+    <TextView
+        android:textColor="#fff"
+        android:id="@+id/tv_username"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="未登录"/>
+
+</LinearLayout>

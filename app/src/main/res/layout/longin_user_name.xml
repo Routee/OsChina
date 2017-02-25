@@ -29,6 +29,7 @@
             android:background="@color/login_sp_white"/>
 
         <EditText
+            android:id="@+id/et_login_username"
             android:layout_marginLeft="10dp"
             android:layout_width="0dp"
             android:layout_weight="1"
