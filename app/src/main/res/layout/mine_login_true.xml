@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:imagecontrol="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/rl_login_true"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+    <RelativeLayout
+        android:background="@mipmap/bg_my"
+        android:layout_width="match_parent"
+        android:layout_weight="3"
+        android:layout_height="0dp">
+    <com.zssfw.oschina.ui.widget.RoundImageView
+       android:layout_centerVertical="true"
+        android:id="@+id/iv_head_photo_login"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="15dp"
+        android:src="@mipmap/widget_dface"
+        imagecontrol:border_inside_color="#fff"
+        imagecontrol:border_outside_color="#fff"
+        imagecontrol:border_thickness="1dp"
+        />
+
+    <ImageView
+        android:id="@+id/iv_ismale"
+        android:src="@mipmap/userinfo_icon_male"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/iv_head_photo_login"
+        android:layout_marginLeft="58dp"/>
+
+
+    <TextView
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@id/iv_head_photo_login"
+        android:textColor="#fff"
+        android:id="@+id/tv_username_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="未登录"/>
+
+    <ImageView
+        android:layout_marginRight="15dp"
+        android:layout_alignParentRight="true"
+        android:src="@mipmap/btn_qrcode"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="#1a000000"/>
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:background="#20b955"
+        android:orientation="horizontal"
+        android:id="@+id/ll_mine_foot"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+
+        <TextView
+            android:textColor="#fff"
+            android:text="0\n积分"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:textColor="#fff"
+            android:text="0\n收藏"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:textColor="#fff"
+            android:text="0\n关注"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:textColor="#fff"
+            android:text="0\n粉丝"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

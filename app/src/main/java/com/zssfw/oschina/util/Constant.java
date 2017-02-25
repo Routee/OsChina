@@ -20,4 +20,8 @@ public class Constant {
 
     public static final String[] DYNAMIC_TITLE = {"最新动弹", "热门动弹", "我的动弹"};
     public static final String DYNAMIC_LATEST = "/action/apiv2/tweets?type=1";
+    public static final String LOGIN =HOST+ "/action/api/login_validate";
+    public static final String FRAGMENTNAME = "fragment";
+    public static final String SP_USERNAME = "username";
+    public static final String SP_PWD = "password";
 }

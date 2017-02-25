@@ -21,6 +21,7 @@
         </activity>
         <activity android:name=".ui.act.WebActivity">
         </activity>
+        <activity android:name=".util.GlobalActivity"/>
     </application>
 
 </manifest>
