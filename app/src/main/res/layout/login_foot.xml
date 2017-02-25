@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:showIn="@layout/fragment_login">
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_marginTop="30dp"
+        android:singleLine="true"
+        android:text="忘记密码 ？"
+        android:textSize="16dp"
+        android:textColor="@color/login_sp_green"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
+    <Button
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/selector_login_bt"
+        android:layout_width="match_parent"
+        android:text="登      录"
+        android:textSize="20dp"
+        android:textColor="@android:color/white"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/bt_regist"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/selector_login_regisbt"
+        android:layout_width="match_parent"
+        android:text="注     册"
+        android:textSize="20dp"
+        android:textColor="@android:color/white"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

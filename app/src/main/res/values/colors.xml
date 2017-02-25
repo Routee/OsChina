@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#00ACFF</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="gray">#ccc</color>
+    <color name="bg_gray">#8f342a27</color>
+    <color name="bt_gray">#da4b4948</color>
+    <color name="login_sp_gray">#94b4b2b2</color>
+    <color name="login_sp_green">#ec23a016</color>
+    <color name="login_sp_bt_green">#e6366331</color>
+    <color name="login_sp_white">#77f6f9f6</color>
+    <color name="regist_hingt">#7ceff4ef</color>
+    <color name="login_sp_transprent">#00f6f9f6</color>
+</resources>

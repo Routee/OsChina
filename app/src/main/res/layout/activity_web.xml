@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#fff"
+              android:orientation="vertical"
+              android:divider="@drawable/shape_divider"
+              android:showDividers="middle"
+    >
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:gravity="center_vertical">
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="13dp"
+            android:src="@mipmap/btn_back_normal"
+            android:id="@+id/iv"/>
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="资讯详情"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            android:layout_alignTop="@+id/iv"
+            android:layout_toRightOf="@+id/iv"
+            android:layout_toEndOf="@+id/iv"
+            android:id="@+id/textView2"/>
+
+
+    </RelativeLayout>
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="11"
+        ></WebView>
+
+    <include layout="@layout/fav_share_comment"/>
+
+</LinearLayout>

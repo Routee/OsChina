@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout
+
+    android:padding="5dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:orientation="horizontal"
+    tools:showIn="@layout/news_details">
+    <Space
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"></Space>
+
+    <EditText
+        android:focusable="false"
+        android:id="@+id/web_et"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="8"
+        android:background="@drawable/shape_news_comment"
+        android:drawableLeft="@mipmap/comment"
+        android:padding="5dp"
+        android:text="发表评论"/>
+    <Space
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"></Space>
+
+    <Button
+        android:id="@+id/web_bt_fav"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@mipmap/ic_fav_normal"
+        android:padding="5dp"/>
+    <Space
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"></Space>
+
+    <Button
+        android:id="@+id/web_bt_share"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@mipmap/ic_share_black_normal"
+        android:padding="5dp"/>
+
+</LinearLayout>
