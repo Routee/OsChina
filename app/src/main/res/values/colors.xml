@@ -12,4 +12,9 @@
     <color name="login_sp_white">#77f6f9f6</color>
     <color name="regist_hingt">#7ceff4ef</color>
     <color name="login_sp_transprent">#00f6f9f6</color>
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="result_view">#b0000000</color>
+    <color name="viewfinder_laser">#ffcc0000</color>
+    <color name="possible_result_points">#c0ffbd21</color>
+    <color name="status_text">#ffffffff</color>
 </resources>
