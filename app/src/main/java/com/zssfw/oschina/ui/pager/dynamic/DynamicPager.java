@@ -56,11 +56,11 @@ public class DynamicPager extends BaseFragment {
             mDynamicPagerList = new ArrayList<>();
 
         //mDynamicPagerList.clear();
+        HotFragment hotFragment1 = new HotFragment(1);
         LatestFragment latestFragment = new LatestFragment();
-        HotFragment hotFragment = new HotFragment();
         MyDynamicFragment myDynamicFragment = new MyDynamicFragment();
-        mDynamicPagerList.add(new FragmentBean(latestFragment, DYNAMIC_TITLE[0]));
-        mDynamicPagerList.add(new FragmentBean(hotFragment, DYNAMIC_TITLE[1]));
+        mDynamicPagerList.add(new FragmentBean(hotFragment1, DYNAMIC_TITLE[0]));
+        mDynamicPagerList.add(new FragmentBean(latestFragment, DYNAMIC_TITLE[1]));
         mDynamicPagerList.add(new FragmentBean(myDynamicFragment, DYNAMIC_TITLE[2]));
 
         mAdapter = new MultipleAdapter(((MainActivity) getContext()).getSupportFragmentManager(), mDynamicPagerList);

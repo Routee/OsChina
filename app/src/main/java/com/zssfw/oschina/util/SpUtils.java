@@ -28,7 +28,7 @@ public class SpUtils {
         if (!file.exists()) {
             file.mkdirs();
         }
-        File dir = new File(file, "dynamicList");
+        File dir = new File(file, Constant.ONFILE_NAME);
         ObjectOutputStream objectOutputStream = null;
         try {
             try {
@@ -50,8 +50,11 @@ public class SpUtils {
 
     public static Object getlist(Context context) {
         File file = new File(Environment.getExternalStorageDirectory(), File.separator + context.getPackageName());
-        File dir = new File(file, "dynamicList");
-        if (file == null) {
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        File dir = new File(file,Constant.ONFILE_NAME);
+        if (!dir.exists()) {
             return null;
         }
         ObjectInputStream objectInputStream = null;
