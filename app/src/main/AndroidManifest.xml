@@ -26,6 +26,7 @@
         <activity android:name=".ui.act.WebActivity">
         </activity>
         <activity android:name=".util.GlobalActivity"/>
+        <activity android:name=".ui.act.ShowActivity"></activity>
         <activity
             android:name="zxing.android.CaptureActivity"
             android:screenOrientation="portrait"

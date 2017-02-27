@@ -3,25 +3,31 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <LinearLayout
-        android:id="@+id/layout_third_title"
-        android:orientation="horizontal"
-        android:gravity="center"
+    <!--<LinearLayout-->
+        <!--android:id="@+id/layout_third_title"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:gravity="center"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--&gt;-->
+
+
+    <!--</LinearLayout>-->
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swiperefresh"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="match_parent">
 
 
-    </LinearLayout>
+        <ListView
+            android:id="@+id/secondary_listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null">
 
-
-    <ListView
-        android:id="@+id/secondary_listview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical">
-
-    </ListView>
+        </ListView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 
 </LinearLayout>

@@ -1,6 +1,7 @@
 package com.zssfw.oschina.ui.pager.found.fragment.ossw;
 
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ListView;
@@ -23,6 +24,12 @@ import java.util.List;
 /**
  * Created by Routee on 2017/2/24.
  */
+
+public class DomesticFragment extends BaseFragment {
+    @Override
+    public SwipeRefreshLayout getSwipeRefreshLayout() {
+        return null;
+    }
 
 public class DomesticFragment extends BaseFragment implements PullToRefreshBase.OnRefreshListener2, SwipeRefreshLayout.OnRefreshListener {
 

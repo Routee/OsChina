@@ -1,6 +1,7 @@
 package com.zssfw.oschina.ui.pager.found.fragment.ossw;
 
 import android.view.LayoutInflater;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -22,6 +23,11 @@ import java.util.List;
  */
 
 public class ClassfyFragment extends BaseFragment {
+    @Override
+    public SwipeRefreshLayout getSwipeRefreshLayout() {
+        return null;
+    }
+
     private static final int                                                                FIRST         = 0;
     private static final int                                                                SECOND        = 1;
     private static final int                                                                THIRD         = 2;

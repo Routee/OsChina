@@ -1,6 +1,7 @@
 package com.zssfw.oschina.ui.pager.found;
 
 import android.content.Intent;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -37,6 +38,11 @@ public class FoundPager extends BaseFragment {
     LinearLayout mLlFoundScan;
     @Bind(R.id.ll_found_shake)
     LinearLayout mLlFoundShake;
+
+    @Override
+    public SwipeRefreshLayout getSwipeRefreshLayout() {
+        return null;
+    }
 
     @Override
     public View createView() {

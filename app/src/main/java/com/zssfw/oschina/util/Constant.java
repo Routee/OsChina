@@ -8,6 +8,7 @@ package com.zssfw.oschina.util;
 public class Constant {
     public static final String MESSAGE = "success";
 
+
     public static final String[] MULTIPLE_TITLE = {"资讯", "博客", "问答", "活动"};
     public static final String[] MULTIPLE_BLOG_TITLE = {"最新推荐", "本周热门", "最新博客"};
 
@@ -36,4 +37,18 @@ public class Constant {
     public static       String    DYACTIVITY      ="dyactivity" ;
     public static       String    FILE_NAME1      = "dynamicList";
     public static       String    ITEM_FRAG       = null;
+    //intent
+    public static final String BUNDLE_MSG_TITLE   = "bundle_msg_title";
+    public static final String BUNDLE_MSG_COMMENT = "bundle_msg_comment";
+    public static final String BUNDLE_MSG_ID = "bundle_msg_id";
+    public static final String BUNDLE_MSG_URL = "bundle_msg_url";
+    public static final String BUNDLE             = "bundle";
+    public static final String INTENT_CLASS       = "intent_class";
+
+    //----资讯
+
+    public static final String   NEWS_DETAILS   = "/action/apiv2/news?id=";
+
+
+
 }

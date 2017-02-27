@@ -18,4 +18,5 @@
     <color name="viewfinder_laser">#ffcc0000</color>
     <color name="possible_result_points">#c0ffbd21</color>
     <color name="status_text">#ffffffff</color>
+    <color name="text_gray">#bfbfbf</color>
 </resources>

@@ -1,5 +1,6 @@
 package com.zssfw.oschina.ui.pager.plus;
 
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.TextView;
 
@@ -18,6 +19,11 @@ public class PlusPager extends BaseFragment {
 //
 //        return tv;
 //    }
+
+    @Override
+    public SwipeRefreshLayout getSwipeRefreshLayout() {
+        return null;
+    }
 
     @Override
     public View createView() {

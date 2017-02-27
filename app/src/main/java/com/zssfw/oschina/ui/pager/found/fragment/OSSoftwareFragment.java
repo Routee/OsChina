@@ -2,6 +2,7 @@ package com.zssfw.oschina.ui.pager.found.fragment;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 
 import com.zssfw.oschina.R;
@@ -35,6 +36,11 @@ public class OSSoftwareFragment extends BaseFragment {
 
     private List<FragmentBean> mFoundOSSList = new ArrayList<>();
     private MultipleAdapter mAdapter;
+
+    @Override
+    public SwipeRefreshLayout getSwipeRefreshLayout() {
+        return null;
+    }
 
     @Override
     public View createView() {

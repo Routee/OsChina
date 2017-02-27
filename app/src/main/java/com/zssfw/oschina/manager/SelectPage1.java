@@ -1,11 +1,8 @@
 package com.zssfw.oschina.manager;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.Button;
 import android.widget.FrameLayout;
 
 import com.zssfw.oschina.R;
@@ -18,23 +15,21 @@ import java.util.List;
  * 描述 ${根据网络状况切换显示的二级界面}
  */
 
-public abstract class SelectPage extends FrameLayout implements SwipeRefreshLayout.OnRefreshListener {
+public abstract class SelectPage1 extends FrameLayout {
 
-    private View               mLoadingView;
-    private View               mErrorView;
-    private View               mSuccessView;
-    private SwipeRefreshLayout mSwipeRefreshLayout;
-    private Button             mBt_reInit;
+    private View mLoadingView;
+    private View mErrorView;
+    private View mSuccessView;
 
-    public SelectPage(Context context) {
+    public SelectPage1(Context context) {
         this(context, null);
     }
 
-    public SelectPage(Context context, AttributeSet attrs) {
+    public SelectPage1(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public SelectPage(Context context, AttributeSet attrs, int defStyleAttr) {
+    public SelectPage1(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
@@ -42,18 +37,8 @@ public abstract class SelectPage extends FrameLayout implements SwipeRefreshLayo
     private void init() {
         if (mLoadingView == null)
             mLoadingView = View.inflate(getContext(), R.layout.page_loading_view, null);
-
-        if (mErrorView == null) {
+        if (mErrorView == null)
             mErrorView = View.inflate(getContext(), R.layout.page_error_view, null);
-            mBt_reInit = (Button) mErrorView.findViewById(R.id.re_init);
-            mBt_reInit.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    showPage();
-                }
-            });
-        }
-
         if (mSuccessView == null) {
             mSuccessView = createSuccessView();
             if (mSuccessView == null) {
@@ -61,16 +46,6 @@ public abstract class SelectPage extends FrameLayout implements SwipeRefreshLayo
             }
         }
 
-        if (mSwipeRefreshLayout==null) {
-            mSwipeRefreshLayout = getSwipeRefresh();
-            if (mSwipeRefreshLayout != null && !(mSwipeRefreshLayout instanceof SwipeRefreshLayout)) {
-                throw new RuntimeException("要刷新就返回个  SwipeRefreshLayout ,不然返回null");
-            }
-        }
-        if (mSwipeRefreshLayout != null) {
-            mSwipeRefreshLayout.setColorSchemeColors(Color.RED,Color.YELLOW,Color.BLUE);
-            mSwipeRefreshLayout.setOnRefreshListener(this);
-        }
         addView(mErrorView);
         addView(mSuccessView);
         addView(mLoadingView);
@@ -79,8 +54,6 @@ public abstract class SelectPage extends FrameLayout implements SwipeRefreshLayo
 
         showPage();
     }
-
-    protected abstract SwipeRefreshLayout getSwipeRefresh();
 
     public void showPage() {
 
@@ -93,9 +66,7 @@ public abstract class SelectPage extends FrameLayout implements SwipeRefreshLayo
                     public void run() {
                         mCurrentState = checkData(data);//检查是否有数据
                         changePage(mCurrentState);//根据数据显示
-                        if (mSwipeRefreshLayout != null) {
-                            mSwipeRefreshLayout.setRefreshing(false);
-                        }
+
                     }
                 });
             }
@@ -117,11 +88,11 @@ public abstract class SelectPage extends FrameLayout implements SwipeRefreshLayo
                 if (list.size() == 0) {
                     return LOADINGSTATE.ERROR;
                 } else {
-                    //                    for (Object o : ((List) data)) {
-                    //                        if (o != null) {
-                    //                            return LOADINGSTATE.SUCCESS;
-                    //                        }
-                    //                    }
+//                    for (Object o : ((List) data)) {
+//                        if (o != null) {
+//                            return LOADINGSTATE.SUCCESS;
+//                        }
+//                    }
                     return LOADINGSTATE.SUCCESS;
                 }
             } else {
@@ -131,12 +102,7 @@ public abstract class SelectPage extends FrameLayout implements SwipeRefreshLayo
 
     }
 
-    public abstract Object getNetData();
-
-    @Override//下拉刷新
-    public void onRefresh() {
-        showPage();
-    }
+    protected abstract Object getNetData();
 
 
     public enum LOADINGSTATE {

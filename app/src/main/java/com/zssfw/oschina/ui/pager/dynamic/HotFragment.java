@@ -2,6 +2,7 @@ package com.zssfw.oschina.ui.pager.dynamic;
 
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -76,6 +77,11 @@ public class HotFragment extends BaseFragment {
             mDynnamicAdapterBase.notifyDataSetChanged();
         }
         mPullToRefreshScrollView.onRefreshComplete();
+    }
+
+    @Override
+    public SwipeRefreshLayout getSwipeRefreshLayout() {
+        return null;
     }
 
     @Override
