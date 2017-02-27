@@ -90,7 +90,7 @@ public class CommentFragMent extends DYBaseFragMent implements View.OnClickListe
 
     @Override
     protected void setUIData() {
-         String uri = "http://www.oschina.net/action/apiv2/tweet?id="+ Constant.ITEM_FRAG;
+        String uri = "http://www.oschina.net/action/apiv2/tweet?id=" + Constant.ITEM_FRAG;
         //String uri = "http://www.oschina.net/action/apiv2/tweet?id=12266579";
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder().url(uri).build();
@@ -131,12 +131,14 @@ public class CommentFragMent extends DYBaseFragMent implements View.OnClickListe
 
     private void addViewPagerTab() {
         ArrayList<DYdetaisTableVP> list = new ArrayList();
-        for (int i = 0; i < 2; i++) {
-            DYdetaisTableVP dYdetaisTableVP = new DYdetaisTableVP();
-            dYdetaisTableVP.mFragment = new DYdetailListFragment();
-            dYdetaisTableVP.mTitle = "赞（12）";
-            list.add(dYdetaisTableVP);
-        }
+        DYdetaisTableVP dYdetaisTableVP = new DYdetaisTableVP();
+        dYdetaisTableVP.mFragment = new LikeFragMent();
+        dYdetaisTableVP.mTitle = "赞(" + mDyDetails.getResult().getStatistics().getLike()+")";
+        list.add(dYdetaisTableVP);
+        DYdetaisTableVP dYdetaisTableVP1 = new DYdetaisTableVP();
+        dYdetaisTableVP1.mFragment = new LikeFragMent();
+        dYdetaisTableVP1.mTitle = "评论(" + mDyDetails.getResult().getStatistics().getComment()+")";
+        list.add(dYdetaisTableVP1);
         DYtbViewpage dYtbViewpage = new DYtbViewpage(list);
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fl_comment, dYtbViewpage).commit();
     }
