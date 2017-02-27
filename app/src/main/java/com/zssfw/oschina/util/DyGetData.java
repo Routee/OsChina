@@ -51,6 +51,10 @@ public class DyGetData {
                     String message = response.body().string();
                     Gson gson = new Gson();
                     mHotBean = gson.fromJson(message, HotBean.class);
+                    if (mHotBean == null) {
+                      //  throw new NoLoginException("未登录");
+                     return ;
+                    }
                     if (top) {
                         if (mItems != null && mItems.size() != 0) {
                             List<HotBean.ResultBean.ItemsBean> items = mHotBean.getResult().getItems();

@@ -36,4 +36,5 @@ public class MultipleAdapter extends FragmentStatePagerAdapter {
     public CharSequence getPageTitle(int position) {
         return mPagerList.get(position).getTitle();
     }
+
 }

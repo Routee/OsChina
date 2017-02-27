@@ -30,6 +30,12 @@
             android:name="zxing.android.CaptureActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar"/>
+        <activity android:name=".ui.act.DYActivity">
+        </activity>
+        <activity
+            android:name="zxing.android.CaptureActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar"/>
         <activity android:name=".ui.pager.found.activity.FoundSearchFriendActivity">
         </activity>
     </application>

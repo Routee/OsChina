@@ -1,12 +1,10 @@
 package com.zssfw.oschina.ui.pager.multiple;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -88,6 +86,7 @@ public class NewsFragment extends BaseFragment {
         View head = View.inflate(getContext(), R.layout.item_news_head, null);
         mViewPager = ((ViewPager) head.findViewById(R.id.secondary_viewpager));
         mListView.addHeaderView(head);
+        ButterKnife.bind(this,view);
         return view;
     }
 
@@ -217,19 +216,7 @@ public class NewsFragment extends BaseFragment {
 
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        ButterKnife.bind(this, rootView);
-        return rootView;
-    }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
-    }
 
 
     class NewsHeadAdapter extends BasePagerAdapter<NewsHeadBean.ResultBean.ItemsBean> {

@@ -1,4 +1,4 @@
-package com.zssfw.oschina.ui.pager.dynamic;
+package com.zssfw.oschina.ui.pager.dynamic.dyfg;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,26 +7,30 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.zssfw.oschina.R;
-
 /**
- * Created by SJJ on 2017/2/21.
- * 描述 ${最新动弹  二级标签}
+ * @创建者 administrator
+ * @创建时间 2017/2/25 13:42
+ * @描述 ${TODO}
+ * @更新者 $Author$
+ * @更新时间 2017/2/25$
+ * @更新描述 ${TODO}
  */
 
-public class LatestFragment extends Fragment {
+public abstract class DYBaseFragMent extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = View.inflate(getActivity(), R.layout.fg_dy, null);
 
-        return view;
+        return setView(inflater);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        HotFragment hotFragment2 = new HotFragment(2);
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fl_fragment, hotFragment2).commit();
+        setUIData();
     }
+
+    protected abstract void setUIData();
+
+    public abstract View setView(LayoutInflater inflater);
 }
