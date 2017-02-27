@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
+              android:layout_height="wrap_content"
               android:orientation="horizontal"
+              android:background="@android:color/white"
               android:paddingLeft="10dp"
               android:paddingRight="10dp">
 
@@ -38,14 +39,13 @@
             android:textSize="18dp"
             android:maxLines="5"
             android:text="adsfadfadfadsfasdfadsfadsfadsf"/>
-
         <GridView
             android:id="@+id/iv_gridView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:numColumns="3"
-            android:horizontalSpacing="2dp"
-            android:verticalSpacing="2dp">
+            android:horizontalSpacing="1dp"
+            android:verticalSpacing="1dp">
         </GridView>
 
   -->

@@ -1,1 +1,2 @@
-include ':app', ':pullToRefresh', ':pullToRefreshSample'
+include ':app', ':pullToRefresh'
+include ':app', ':pullToRefresh', ':pullToRefreshSample', ':app1'

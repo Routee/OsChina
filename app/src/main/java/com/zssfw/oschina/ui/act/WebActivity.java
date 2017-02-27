@@ -24,10 +24,12 @@ public class WebActivity extends AppCompatActivity {
     }
 
     private void initData() {
-        String href = getIntent().getExtras().getString("href");
-        mWebView.loadUrl(href);
+        final String href = getIntent().getExtras().getString("href");
+       mWebView.loadUrl(href);
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
+
+
 
     }
 }

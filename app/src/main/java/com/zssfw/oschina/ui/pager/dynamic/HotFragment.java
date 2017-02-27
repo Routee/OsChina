@@ -14,6 +14,7 @@ import com.zssfw.oschina.R;
 import com.zssfw.oschina.adapter.DynnamicAdapterBase;
 import com.zssfw.oschina.bean.HotBean;
 import com.zssfw.oschina.ui.pager.plus.BaseFragment;
+import com.zssfw.oschina.util.Constant;
 import com.zssfw.oschina.util.DyGetData;
 import com.zssfw.oschina.util.SpUtils;
 
@@ -45,6 +46,18 @@ public class HotFragment extends BaseFragment {
     private DynnamicAdapterBase mDynnamicAdapterBase;
     private PullToRefreshScrollView mPullToRefreshScrollView;
     private DyGetData mDyGetData;
+    private View mView;
+    private DYView mDYView;
+    private String FileName = "dynamicList1";
+    private int uriID;
+    public HotFragment() {
+    }
+
+    public HotFragment(int uriID) {
+        this.uriID = uriID;
+        Constant.ONFILE_NAME = "dynamicList" + uriID;
+       // FileName = FileName + uriID;
+    }
 
     private void setViewData() {
         final ArrayList listdata = new ArrayList();
@@ -67,29 +80,28 @@ public class HotFragment extends BaseFragment {
 
     @Override
     public View createView() {
-        View view = View.inflate(getActivity(), R.layout.recyclerview, null);
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-        mPullToRefreshScrollView = (PullToRefreshScrollView) view.findViewById(R.id.pull_refresh_scrollview);
+        mView = View.inflate(getActivity(), R.layout.recyclerview, null);
+        mRecyclerView = (RecyclerView) mView.findViewById(R.id.recycler_view);
+        mPullToRefreshScrollView = (PullToRefreshScrollView) mView.findViewById(R.id.pull_refresh_scrollview);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
         initPulltoRefresh();
         mDyGetData = new DyGetData();
-        return view;
+        return mView;
     }
 
     private void initPulltoRefresh() {
-
         mPullToRefreshScrollView.setMode(PullToRefreshBase.Mode.BOTH);
         mPullToRefreshScrollView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ScrollView>() {
             @Override
             public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
                 PullToRefreshBase.Mode currentMode = mPullToRefreshScrollView.getCurrentMode();
                 if (currentMode == PullToRefreshBase.Mode.PULL_FROM_START) {
-                    String url = "http://www.oschina.net/action/apiv2/tweets?type=1";
+                    String url = "http://www.oschina.net/action/apiv2/tweets?type="+uriID;
                     if (mItems != null) {
                         sendHander(url,true);
                     }
-                } else {
-                    String url = "http://www.oschina.net/action/apiv2/tweets?type=1&nextPageToken="+mHotBean.getResult().getNextPageToken();
+                } else {//http://www.oschina.net/action/apiv2/tweet?id=12257133
+                    String url = "http://www.oschina.net/action/apiv2/tweets?type="+uriID+"&nextPageToken="+mHotBean.getResult().getNextPageToken();
                     if (mItems != null) {
                         sendHander(url,false);
                     }
@@ -100,7 +112,16 @@ public class HotFragment extends BaseFragment {
 
     @Override
     public Object getData() {
-        String url = "http://www.oschina.net/action/apiv2/tweets?type=1";
+        String url = "http://www.oschina.net/action/apiv2/tweets?type="+uriID;
+   //     Constant.ONFILE_NAME = FileName +uriID;
+//        if (uriID == 1) {
+//            Constant.ONFILE_NAME = FileName = "dynamicList";
+//        } else if (uriID == 2) {
+//            Constant.ONFILE_NAME = FileName = "dynamicList2";
+//        } else {
+//            Constant.ONFILE_NAME =  FileName = "dynamicList3";
+//            FileName = "dynamicList3";
+//        }
         mItems = (ArrayList<HotBean.ResultBean.ItemsBean>) SpUtils.getlist(getActivity());
         if (mItems != null) {
             mHandler.sendEmptyMessage(1);
@@ -127,4 +148,11 @@ public class HotFragment extends BaseFragment {
 
     }
 
+    public interface DYView {
+        String[] onDYView(View view);
+    }
+
+    public void setDYView(DYView listenner) {
+        this.mDYView = listenner;
+    }
 }
