@@ -38,6 +38,8 @@
             android:theme="@android:style/Theme.NoTitleBar"/>
         <activity android:name=".ui.pager.found.activity.FoundSearchFriendActivity">
         </activity>
+        <activity android:name=".ui.pager.dynamic.dyfg.WebActivity">
+        </activity>
     </application>
 
 </manifest>

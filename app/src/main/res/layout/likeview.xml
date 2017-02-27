@@ -3,14 +3,12 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_refresh"
+    <com.zssfw.oschina.ui.widget.DyRecycleView
+        android:background="#f1f1f1"
+        android:id="@+id/recycler_like"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/shad_recy"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </android.support.v7.widget.RecyclerView>
-    </android.support.v4.widget.SwipeRefreshLayout>
+
+    </com.zssfw.oschina.ui.widget.DyRecycleView>
+
 </LinearLayout>

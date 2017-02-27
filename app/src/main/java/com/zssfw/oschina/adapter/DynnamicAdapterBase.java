@@ -153,8 +153,8 @@ public class DynnamicAdapterBase extends RecyclerView.Adapter {
             mTv_name.setText(mItems.getAuthor().getName());
             mTextUtil.getTextSpannableString(mItems.getContent());
             mTv_time.setText(mItems.getPubDate());
-            mTv_dot.setText(mItems.getStatistics().getFavCount() + "");
-            mTv_comment.setText(mItems.getStatistics().getLike() + "");
+            mTv_dot.setText(mItems.getStatistics().getLike() + "");
+            mTv_comment.setText(mItems.getStatistics().getComment() + "");
             mTv_shard.setText(mItems.getStatistics().getTransmit() + "");
             Glide.with(mContent).load(Uri.parse(mItems.getAuthor().getPortrait())).asBitmap().centerCrop().into(new BitmapImageViewTarget(mIv_head_pic) {
                 @Override
