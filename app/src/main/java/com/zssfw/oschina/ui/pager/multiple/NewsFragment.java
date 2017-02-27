@@ -1,12 +1,10 @@
 package com.zssfw.oschina.ui.pager.multiple;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -88,6 +86,7 @@ public class NewsFragment extends BaseFragment {
         View head = View.inflate(getContext(), R.layout.item_news_head, null);
         mViewPager = ((ViewPager) head.findViewById(R.id.secondary_viewpager));
         mListView.addHeaderView(head);
+        ButterKnife.bind(this,view);
         return view;
     }
 
@@ -126,7 +125,7 @@ public class NewsFragment extends BaseFragment {
                     });
 
                     mTvDesc.setText(headItems.get(0).getName());
-                    NewsHeadAdapter newsHeadAdapter = new NewsHeadAdapter(headItems);
+                    NewsHeadAdapter newsHeadAdapter =  new NewsHeadAdapter(headItems);
                     mViewPager.setAdapter(newsHeadAdapter);
                     mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                         @Override
@@ -158,6 +157,8 @@ public class NewsFragment extends BaseFragment {
             bodyItems.clear();
             mPageToken = null;
         }
+
+
         NewsBodyBean newsBodyBean = JsonCacheManager.getInstance().getCacheBean(HOST + NEWS_BODY + mPageToken, NewsBodyBean.class);
 
         if (newsBodyBean != null && TextUtils.equals(newsBodyBean.getMessage(), MESSAGE)) {
@@ -168,7 +169,7 @@ public class NewsFragment extends BaseFragment {
                 @Override
                 public void run() {
                     FinalListAdapter<NewsBodyBean.ResultBean.ItemsBean> adapter
-                            = new FinalListAdapter<>(bodyItems, R.layout.item_news, new FinalListAdapter.OnFinalListAdapterListener<NewsBodyBean.ResultBean.ItemsBean>() {
+                            =  new FinalListAdapter<>(bodyItems, R.layout.item_news, new FinalListAdapter.OnFinalListAdapterListener<NewsBodyBean.ResultBean.ItemsBean>() {
                         @Override
                         public void bindView(FinalListAdapter.FinalListViewHolder holder, NewsBodyBean.ResultBean.ItemsBean item) {
                             holder.setText(R.id.tv_title, item.getTitle());
@@ -180,6 +181,8 @@ public class NewsFragment extends BaseFragment {
                     mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                            String body = bodyItems.get(i - 2).getBody();
+//                            System.out.println(body);
                             String href = bodyItems.get(i-2).getHref();
                             Intent intent =new Intent(adapterView.getContext(), WebActivity.class);
                             intent.putExtra("href",href);
@@ -190,8 +193,10 @@ public class NewsFragment extends BaseFragment {
                     });
                     mPullRefreshList.onRefreshComplete();
                     mListView.setAdapter(adapter);
+
                 }
             });
+
             haveData = true;
         }
         return haveData ? "" : null;
@@ -217,19 +222,7 @@ public class NewsFragment extends BaseFragment {
 
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        ButterKnife.bind(this, rootView);
-        return rootView;
-    }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
-    }
 
 
     class NewsHeadAdapter extends BasePagerAdapter<NewsHeadBean.ResultBean.ItemsBean> {
