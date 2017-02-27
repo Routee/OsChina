@@ -1,7 +1,6 @@
 package com.zssfw.oschina.ui.pager.found.fragment.ossw;
 
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ListView;
@@ -15,7 +14,6 @@ import com.zssfw.oschina.ui.pager.found.adapter.OsswListAdapter;
 import com.zssfw.oschina.ui.pager.found.bean.DomesticBean;
 import com.zssfw.oschina.ui.pager.found.manager.XmlCacheTool;
 import com.zssfw.oschina.ui.pager.plus.BaseFragment;
-import com.zssfw.oschina.util.Uris;
 import com.zssfw.oschina.util.Util;
 
 import java.util.ArrayList;
@@ -25,13 +23,7 @@ import java.util.List;
  * Created by Routee on 2017/2/24.
  */
 
-public class DomesticFragment extends BaseFragment {
-    @Override
-    public SwipeRefreshLayout getSwipeRefreshLayout() {
-        return null;
-    }
-
-public class DomesticFragment extends BaseFragment implements PullToRefreshBase.OnRefreshListener2, SwipeRefreshLayout.OnRefreshListener {
+public abstract class BasicOsscFragment extends BaseFragment implements PullToRefreshBase.OnRefreshListener2, SwipeRefreshLayout.OnRefreshListener {
 
     private List<DomesticBean.OschinaBean.SoftwaresBean.SoftwareBean> mShowItems = new ArrayList<>();
     private int                                                       page       = 0;
@@ -44,8 +36,10 @@ public class DomesticFragment extends BaseFragment implements PullToRefreshBase.
     private static final int DOWN  = 1;
     private static final int UP    = 2;
 
+
     @Override
     public View createView() {
+        setUrl();
         View view = LayoutInflater.from(getContext()).inflate(R.layout.view_found_osswview, null);
         mSrl = (SwipeRefreshLayout) view.findViewById(R.id.srl_found_ossw);
         mSrl.setOnRefreshListener(this);
@@ -69,11 +63,17 @@ public class DomesticFragment extends BaseFragment implements PullToRefreshBase.
         return view;
     }
 
+    String headUrl = "";
+    String footUrl = "";
+
+    public abstract void setUrl();
+
     int currentPage = 0;
 
     @Override
     public Object getData() {
-        DomesticBean domesticBean = XmlCacheTool.getInstance().getCacheBean(Uris.FOUND_OSSW_DOMESTIC1 + currentPage + Uris.FOUND_OSSW_DOMESTIC2, DomesticBean.class);
+        currentPage = page++;
+        DomesticBean domesticBean = XmlCacheTool.getInstance().getCacheBean(headUrl + currentPage + footUrl, DomesticBean.class);
         mShowItems.addAll(domesticBean.getOschina().getSoftwares().get(0).getSoftware());
         Util.runOnUIThread(new Runnable() {
             @Override

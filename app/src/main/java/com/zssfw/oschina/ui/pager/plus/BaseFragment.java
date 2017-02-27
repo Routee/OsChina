@@ -40,7 +40,7 @@ public abstract class BaseFragment extends Fragment {
                 }
 
                 @Override
-                protected Object getNetData() {
+                public Object getNetData() {
                     return getData();
                 }
 

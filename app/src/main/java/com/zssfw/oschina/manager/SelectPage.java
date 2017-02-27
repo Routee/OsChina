@@ -131,7 +131,7 @@ public abstract class SelectPage extends FrameLayout implements SwipeRefreshLayo
 
     }
 
-    protected abstract Object getNetData();
+    public abstract Object getNetData();
 
     @Override//下拉刷新
     public void onRefresh() {

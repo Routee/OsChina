@@ -72,7 +72,6 @@ public class FoundPager extends BaseFragment {
         Intent intent;
         switch (view.getId()) {
             case R.id.ll_found_ossoftware:
-                Toast.makeText(MyApplication.mContent, "开源软件", Toast.LENGTH_SHORT).show();
                 intent = new Intent(MyApplication.mContent, FoundShowActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra(Constant.FOUNDTITLE, "开源软件");
