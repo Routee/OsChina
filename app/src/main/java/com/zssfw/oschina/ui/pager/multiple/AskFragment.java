@@ -1,5 +1,6 @@
 package com.zssfw.oschina.ui.pager.multiple;
 
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.TextView;
 
@@ -11,6 +12,11 @@ import com.zssfw.oschina.ui.pager.plus.BaseFragment;
  */
 
 public class AskFragment extends BaseFragment {
+
+    @Override
+    public SwipeRefreshLayout getSwipeRefreshLayout() {
+        return null;
+    }
 
     @Override
     public View createView() {

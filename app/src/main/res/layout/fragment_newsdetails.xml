@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:scrollbars="none"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@android:color/white"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_title"
+                style="@style/news_title_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"/>
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"/>
+
+            <WebView
+                android:id="@+id/webview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            </WebView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_software"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/bg_gray"
+                android:padding="10dp"
+                android:text="相关软件"/>
+
+            <ListView
+                android:id="@+id/listview_soft"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </ListView>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/bg_gray"
+            android:padding="10dp"
+            android:text="相关推荐"
+            android:id="@+id/textView"/>
+
+        <com.zssfw.oschina.ui.widget.MyListView
+            android:id="@+id/listview_recomend"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </com.zssfw.oschina.ui.widget.MyListView>
+    </LinearLayout>
+</ScrollView>

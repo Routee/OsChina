@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:src="@mipmap/ic_error_page"/>
     <Button
+        android:id="@+id/re_init"
         android:layout_width="wrap_content"
         android:text="重新加载"
         android:layout_height="wrap_content"/>

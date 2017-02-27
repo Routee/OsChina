@@ -26,11 +26,15 @@
         <activity android:name=".ui.act.WebActivity">
         </activity>
         <activity android:name=".util.GlobalActivity"/>
+        <activity android:name=".ui.act.ShowActivity"></activity>
         <activity
             android:name="zxing.android.CaptureActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar"/>
         <activity android:name=".ui.act.DYActivity">
+        </activity>
+        <activity android:name=".ui.act.TanActivity"
+                  android:windowSoftInputMode="stateHidden|adjustResize">
         </activity>
         <activity
             android:name="zxing.android.CaptureActivity"

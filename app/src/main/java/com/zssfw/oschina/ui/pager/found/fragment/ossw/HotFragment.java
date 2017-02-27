@@ -1,30 +1,23 @@
 package com.zssfw.oschina.ui.pager.found.fragment.ossw;
 
-import android.view.View;
-import android.widget.TextView;
+import android.support.v4.widget.SwipeRefreshLayout;
 
-import com.zssfw.oschina.MyApplication;
-import com.zssfw.oschina.ui.pager.plus.BaseFragment;
+import com.zssfw.oschina.util.Uris;
 
 /**
  * Created by Routee on 2017/2/24.
  */
 
-public class HotFragment extends BaseFragment {
+public class HotFragment extends BasicOsscFragment {
+
     @Override
-    public View createView() {
-        TextView tv = new TextView(MyApplication.mContent);
-        tv.setText("热门");
-        return tv;
+    public SwipeRefreshLayout getSwipeRefreshLayout() {
+        return null;
     }
 
     @Override
-    public Object getData() {
-        return "";
-    }
-
-    @Override
-    public void refresh() {
-
+    public void setUrl() {
+        headUrl = Uris.FOUND_OSSW_HOT1;
+        footUrl = Uris.FOUND_OSSW_HOT2;
     }
 }

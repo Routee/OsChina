@@ -41,7 +41,7 @@ public class FinalListAdapter<T> extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         FinalListViewHolder holder;
         if (convertView == null) {
             convertView = View.inflate(parent.getContext(), mLayoutId, null);
@@ -51,11 +51,25 @@ public class FinalListAdapter<T> extends BaseAdapter {
             holder = (FinalListViewHolder) convertView.getTag();
         }
         bindView(holder, mList.get(position));
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClick(position);
+            }
+        });
         return convertView;
     }
 
     private void bindView(FinalListViewHolder holder, T item) {
         mListener.bindView(holder, item);
+    }
+
+
+    /**
+     * @param position 条目点击事件
+     */
+    public void onItemClick(int position) {
+
     }
 
     public interface OnFinalListAdapterListener<T> {

@@ -1,6 +1,7 @@
 package com.zssfw.oschina.ui.pager.found;
 
 import android.content.Intent;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -39,6 +40,11 @@ public class FoundPager extends BaseFragment {
     LinearLayout mLlFoundShake;
 
     @Override
+    public SwipeRefreshLayout getSwipeRefreshLayout() {
+        return null;
+    }
+
+    @Override
     public View createView() {
         View view = View.inflate(MyApplication.mContent, R.layout.page_found, null);
         ButterKnife.bind(FoundPager.this, view);
@@ -66,7 +72,6 @@ public class FoundPager extends BaseFragment {
         Intent intent;
         switch (view.getId()) {
             case R.id.ll_found_ossoftware:
-                Toast.makeText(MyApplication.mContent, "开源软件", Toast.LENGTH_SHORT).show();
                 intent = new Intent(MyApplication.mContent, FoundShowActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra(Constant.FOUNDTITLE, "开源软件");
