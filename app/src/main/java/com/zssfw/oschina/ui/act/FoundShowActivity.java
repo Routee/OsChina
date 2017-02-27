@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.zssfw.oschina.R;
@@ -35,12 +37,31 @@ public class FoundShowActivity extends AppCompatActivity {
         setSupportActionBar(mTb);
         Class clazz = (Class) intent.getSerializableExtra(Constant.FOUNDFRAGMENT);
         try {
+            String name = "";
+
             Fragment fragment = (Fragment) clazz.newInstance();
+            try {
+                name = intent.getStringExtra(Constant.SOFTWARENAME);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (!TextUtils.isEmpty(name)) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(Constant.SOFTWARENAME,name);
+                fragment.setArguments(bundle);
+            }
             getSupportFragmentManager().beginTransaction().replace(R.id.framelayout, fragment).commit();
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        onBackPressed();
+        return true;
     }
 }

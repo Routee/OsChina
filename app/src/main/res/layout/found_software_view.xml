@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <WebView
+            android:id="@+id/wv_found_software"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></WebView>
+
+        <LinearLayout
+            android:background="#fff"
+            android:gravity="center"
+            android:id="@+id/ll_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="bottom"
+            android:orientation="horizontal">
+
+            <TextView
+                android:text="评论(0)"
+                android:padding="10dp"
+                android:textSize="16sp"
+                android:drawableLeft="@mipmap/comment_sw"
+                android:gravity="center"
+                android:id="@+id/tv_comment"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:text="收藏"
+                android:padding="10dp"
+                android:textSize="16sp"
+                android:drawableLeft="@mipmap/collect"
+                android:gravity="center"
+                android:id="@+id/tv_collect"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:text="分享"
+                android:padding="10dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:id="@+id/tv_share"
+                android:drawableLeft="@mipmap/share"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+
+        </LinearLayout>
+    </FrameLayout>
+
+</LinearLayout>

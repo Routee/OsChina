@@ -1,5 +1,6 @@
 package com.zssfw.oschina.ui.pager.found.fragment;
 
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -11,20 +12,33 @@ import android.os.Message;
 import android.os.Vibrator;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.RotateAnimation;
 import android.view.animation.TranslateAnimation;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.zssfw.oschina.MyApplication;
 import com.zssfw.oschina.R;
+import com.zssfw.oschina.manager.HttpManager;
+import com.zssfw.oschina.ui.act.FoundShowActivity;
+import com.zssfw.oschina.ui.pager.found.bean.ShakeBean;
+import com.zssfw.oschina.ui.pager.found.utils.Xml2JsonUtil;
 import com.zssfw.oschina.ui.pager.plus.BaseFragment;
+import com.zssfw.oschina.util.Constant;
+import com.zssfw.oschina.util.GsonUtil;
+import com.zssfw.oschina.util.Uris;
+import com.zssfw.oschina.util.Util;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import static android.content.Context.SENSOR_SERVICE;
 import static android.content.Context.VIBRATOR_SERVICE;
@@ -40,12 +54,24 @@ public class ShakeFragment extends BaseFragment implements SensorEventListener {
     private static final int END_SHAKE   = 2;
     @Bind(R.id.iv_found_shake)
     ImageView    mIv;
-    @Bind(R.id.fl_item_found_shake)
-    FrameLayout  mFlItemFoundShake;
+    @Bind(R.id.iv_found_shake_head)
+    ImageView    mIvFoundShakeHead;
+    @Bind(R.id.tv_found_shake_title)
+    TextView     mTvFoundShakeTitle;
+    @Bind(R.id.tv_found_shake_dsc)
+    TextView     mTvFoundShakeDsc;
+    @Bind(R.id.tv_found_shake_author)
+    TextView     mTvFoundShakeAuthor;
+    @Bind(R.id.tv_found_shake_time)
+    TextView     mTvFoundShakeTime;
+    @Bind(R.id.tv_found_shake_comments)
+    TextView     mTvFoundShakeComments;
+    @Bind(R.id.ll_found_shake)
+    LinearLayout mLlFoundShake;
     private SensorManager mSensorManager;
     private Sensor        mAccelerometerSensor;
     private Vibrator      mVibrator;
-    private boolean isShake  = false;
+    private boolean isShake = false;
     private SoundPool mSoundPool;
     private Handler mHandler = new Handler() {
         @Override
@@ -72,6 +98,7 @@ public class ShakeFragment extends BaseFragment implements SensorEventListener {
         }
     };
     private int mShakeSound;
+    private String mSoftware;
 
     private void startAnimation() {
         RotateAnimation rAnim = new RotateAnimation(-10, 20, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
@@ -87,7 +114,37 @@ public class ShakeFragment extends BaseFragment implements SensorEventListener {
     }
 
     private void showItems() {
-        // TODO: 2017/2/23 摇一摇结果
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                final String json = getJsonBean();
+                Util.runOnUIThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (TextUtils.isEmpty(json)) {
+                            Toast.makeText(getContext(), "宝宝累了,宝宝不要摇了", Toast.LENGTH_SHORT).show();
+                        } else {
+                            ShakeBean bean = GsonUtil.parseJsonToBean(json, ShakeBean.class);
+                            showResult(bean);
+                        }
+                    }
+                });
+            }
+        }).start();
+
+
+    }
+
+    private void showResult(ShakeBean bean) {
+        mLlFoundShake.setVisibility(View.VISIBLE);
+        Glide.with(getContext()).load(bean.getOschina().getImage().get(0)).into(mIvFoundShakeHead);
+        //获取mSoftware名称,后期启动activty要用
+        mSoftware = bean.getOschina().getUrl().get(0);
+        mTvFoundShakeTitle.setText(bean.getOschina().getTitle().get(0));
+        mTvFoundShakeDsc.setText(bean.getOschina().getDetail().get(0));
+        mTvFoundShakeAuthor.setText(bean.getOschina().getAuthor().get(0));
+        mTvFoundShakeTime.setText(bean.getOschina().getPubDate().get(0));
+        mTvFoundShakeComments.setText(bean.getOschina().getCommentCount().get(0));
     }
 
     @Override
@@ -99,12 +156,13 @@ public class ShakeFragment extends BaseFragment implements SensorEventListener {
     public View createView() {
         View view = View.inflate(MyApplication.mContent, R.layout.view_shake, null);
         ButterKnife.bind(ShakeFragment.this, view);
+        mLlFoundShake.setVisibility(View.GONE);
         return view;
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onResume() {
+        super.onResume();
         mSoundPool = new SoundPool(5, 0, 5);
         mShakeSound = mSoundPool.load(MyApplication.mContent, R.raw.shake_sound, 1);
         mVibrator = (Vibrator) MyApplication.mContent.getSystemService(VIBRATOR_SERVICE);
@@ -116,6 +174,12 @@ public class ShakeFragment extends BaseFragment implements SensorEventListener {
                 mSensorManager.registerListener(this, mAccelerometerSensor, SensorManager.SENSOR_DELAY_UI);
             }
         }
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
     }
 
     @Override
@@ -177,5 +241,26 @@ public class ShakeFragment extends BaseFragment implements SensorEventListener {
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
+    }
+
+    public String getJsonBean() {
+        String xml = HttpManager.getInstance().dataGet(Uris.FOUND_OSSW_SHAKE);
+        if (TextUtils.isEmpty(xml)) {
+            return "";
+        }
+        String json = Xml2JsonUtil.xml2JSON(xml);
+        //        Log.d("aaaaaa", json);
+        return json;
+    }
+
+
+    @OnClick(R.id.ll_found_shake)
+    public void onClick() {
+        Intent intent = new Intent(getContext(), FoundShowActivity.class);
+        intent.putExtra(Constant.FOUNDTITLE, "软件详情");
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(Constant.FOUNDFRAGMENT, SoftWareDetailsFragment.class);
+        intent.putExtra(Constant.SOFTWARENAME, mSoftware);
+        startActivity(intent);
     }
 }
