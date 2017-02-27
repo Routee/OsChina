@@ -26,7 +26,7 @@ public abstract class BaseFragment extends Fragment {
         if (mSelectPage == null) {
             mSelectPage = new SelectPage(getContext()) {
                 @Override
-                protected Object getNetData() {
+                public Object getNetData() {
                     return getData();
                 }
 

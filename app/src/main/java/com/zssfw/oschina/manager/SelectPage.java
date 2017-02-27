@@ -102,7 +102,7 @@ public abstract class SelectPage extends FrameLayout {
 
     }
 
-    protected abstract Object getNetData();
+    public abstract Object getNetData();
 
 
     public enum LOADINGSTATE {

@@ -1,30 +1,16 @@
 package com.zssfw.oschina.ui.pager.found.fragment.ossw;
 
-import android.view.View;
-import android.widget.TextView;
-
-import com.zssfw.oschina.MyApplication;
-import com.zssfw.oschina.ui.pager.plus.BaseFragment;
+import com.zssfw.oschina.util.Uris;
 
 /**
  * Created by Routee on 2017/2/24.
  */
 
-public class LatestFragment extends BaseFragment {
-    @Override
-    public View createView() {
-        TextView tv = new TextView(MyApplication.mContent);
-        tv.setText("最新");
-        return tv;
-    }
+public class LatestFragment extends BasicOsscFragment {
 
     @Override
-    public Object getData() {
-        return "";
-    }
-
-    @Override
-    public void refresh() {
-
+    public void setUrl() {
+        headUrl = Uris.FOUND_OSSW_LATEST1;
+        footUrl = Uris.FOUND_OSSW_LATEST2;
     }
 }

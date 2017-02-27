@@ -75,6 +75,5 @@ public class OSSoftwareFragment extends BaseFragment {
 
     @Override
     public void refresh() {
-
     }
 }
