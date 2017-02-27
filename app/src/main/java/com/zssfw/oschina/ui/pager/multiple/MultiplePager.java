@@ -2,6 +2,7 @@ package com.zssfw.oschina.ui.pager.multiple;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 
 import com.zssfw.oschina.R;
@@ -29,6 +30,11 @@ public class MultiplePager extends BaseFragment {
     private TabLayout       mTablayout;
     private ViewPager       mStairViewpager;
 
+
+    @Override
+    public SwipeRefreshLayout getSwipeRefreshLayout() {
+        return null;
+    }
 
     @Override
     public View createView() {

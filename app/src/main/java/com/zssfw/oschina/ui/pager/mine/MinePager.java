@@ -2,6 +2,7 @@ package com.zssfw.oschina.ui.pager.mine;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -35,6 +36,11 @@ public class MinePager extends BaseFragment implements View.OnClickListener {
     private ImageView mIvSex;
     private RoundImageView mRivLogin;
 
+
+    @Override
+    public SwipeRefreshLayout getSwipeRefreshLayout() {
+        return null;
+    }
 
     @Override
     public View createView() {

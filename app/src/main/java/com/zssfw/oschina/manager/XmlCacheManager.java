@@ -31,6 +31,7 @@ public class XmlCacheManager {
             //说明有
             //4.去本地保存数据
             CacheManager.getInstance().saveCacheData(url, content);
+
         }
         if (TextUtils.isEmpty(content)) {
             //如果为空,直接返回null

@@ -1,5 +1,6 @@
 package com.zssfw.oschina.ui.pager.mine;
 
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -21,6 +22,11 @@ public class LogoutFragment extends BaseFragment implements View.OnClickListener
     private TextView mTvUsername;
     private TextView mTvLocation;
     private Button mBt;
+
+    @Override
+    public SwipeRefreshLayout getSwipeRefreshLayout() {
+        return null;
+    }
 
     @Override
     public View createView() {

@@ -56,9 +56,12 @@ public class HttpManager {
         Response response = null;
         try {
             response = okHttpClient.newCall(request).execute();
+            System.out.println(response.body().string()+"123123123");
+
             return response.body().string();
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println(e.toString()+"444444");
             return null;
         }
     }

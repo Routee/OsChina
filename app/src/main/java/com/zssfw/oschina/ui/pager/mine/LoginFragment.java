@@ -2,6 +2,7 @@ package com.zssfw.oschina.ui.pager.mine;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -28,6 +29,11 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
     public  String mMessage;
     public boolean isLogin = false;
     private SharedPreferences mSp;
+
+    @Override
+    public SwipeRefreshLayout getSwipeRefreshLayout() {
+        return null;
+    }
 
     @Override
     public View createView() {
