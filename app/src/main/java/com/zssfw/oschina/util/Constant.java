@@ -32,9 +32,12 @@ public class Constant {
     public static final String    FOUNDTITLE      = "FOUNDTITLE";
     public static final String    FOUNDFRAGMENT   = "FOUNDFRAGMENT";
     public static final int       SCANREQUESTCODE = 40;
-    public static final String SOFTWARENAME       = "http://www.oschina.net/action/apiv2/software?ident=";
+    public static final String WIDTHPIXELS        = "widthpixels";
+    public static final int EMOJI_LIE             = 7;
+    public static  int widthpixels                = 0;
     public static String ONFILE_NAME              = "dynamicList1";
     public static int    ITEM_FRAG1               = -1;
+    public static final String SOFTWARENAME       = "http://www.oschina.net/action/apiv2/software?ident=";
     public static       int       DYSHARD         = 3;
     public static       int       DYCOMMENT       = 2;
     public static       String    DYACTIVITY      ="dyactivity" ;

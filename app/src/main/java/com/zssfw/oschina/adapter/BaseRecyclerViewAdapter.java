@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 
 import com.squareup.picasso.Picasso;
 import com.zssfw.oschina.R;
+import com.zssfw.oschina.util.Constant;
 
 import java.util.List;
 
@@ -40,12 +41,14 @@ public class BaseRecyclerViewAdapter extends RecyclerView.Adapter<BaseRecyclerVi
         ImageView iv = (ImageView) view.findViewById(R.id.iv_emoji);
         if (mList.get(position) instanceof Integer) {
             if (mLayoutParams == null) {
-                mLayoutParams = (LinearLayout.LayoutParams) iv.getLayoutParams();
-                mLayoutParams.setMargins(0,10,0,10);
+                mLayoutParams = new LinearLayout.LayoutParams(Constant.widthpixels / Constant.EMOJI_LIE, Constant.widthpixels / Constant.EMOJI_LIE);
+//                mLayoutParams.setMargins(20,20,20,20);
             }
             iv.setImageResource(((Integer) mList.get(position)));
+            iv.setScaleType(ImageView.ScaleType.FIT_XY);
             iv.setLayoutParams(mLayoutParams);
-            iv.setPadding(20, 5, 20, 5);
+            int pad = Constant.widthpixels / Constant.EMOJI_LIE / Constant.EMOJI_LIE;
+            iv.setPadding(pad, pad, pad, pad);
         } else if (mList.get(position) instanceof String) {
             Picasso.with(view.getContext()).load(((String) mList.get(position))).into(iv);
             iv.setPadding(0, 0, 10, 10);

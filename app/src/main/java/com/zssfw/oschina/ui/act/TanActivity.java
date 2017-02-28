@@ -1,9 +1,11 @@
 package com.zssfw.oschina.ui.act;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -29,6 +31,7 @@ public class TanActivity extends AppCompatActivity {
 
     private String mTitle;
     private int    mShowComment;
+    private int mWidth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +39,17 @@ public class TanActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tan);
         ButterKnife.bind(this);
         init();
+        initChiCun();
 
+    }
+
+    private void initChiCun() {
+        Resources resources = this.getResources();
+        DisplayMetrics dm = resources.getDisplayMetrics();
+        mWidth = dm.widthPixels;
+        Constant.widthpixels = mWidth;
+//        float density1 = dm.density;
+        int height3 = dm.heightPixels;
     }
 
     private void init() {
@@ -47,6 +60,7 @@ public class TanActivity extends AppCompatActivity {
             Bundle bundleExtra = getIntent().getBundleExtra(Constant.BUNDLE);
             mTitle = bundleExtra.getString(Constant.BUNDLE_MSG_TITLE);
 //            mShowComment = bundleExtra.getInt(Constant.BUNDLE_MSG_COMMENT, -1);
+//            bundleExtra.putInt(Constant.WIDTHPIXELS,mWidth);
             fragment.setArguments(bundleExtra);
 
             getSupportFragmentManager().beginTransaction().replace(R.id.framelayout, fragment).commit();

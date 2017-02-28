@@ -34,7 +34,7 @@
         <activity android:name=".ui.act.DYActivity">
         </activity>
         <activity android:name=".ui.act.TanActivity"
-                  android:windowSoftInputMode="stateHidden|adjustResize">
+                  android:windowSoftInputMode="stateVisible|adjustResize">
         </activity>
         <activity
             android:name="zxing.android.CaptureActivity"

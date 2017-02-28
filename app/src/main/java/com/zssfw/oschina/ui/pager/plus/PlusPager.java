@@ -1,5 +1,6 @@
 package com.zssfw.oschina.ui.pager.plus;
 
+import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -55,6 +56,7 @@ public class PlusPager extends BaseFragment implements BaseRecyclerViewAdapter.O
     private ViewTreeObserver.OnGlobalLayoutListener mOnGlobalLayoutListener;
     private boolean isKeyOpen;
     private int minH = 0;
+    private int mWidth;
 
     @Override
     public SwipeRefreshLayout getSwipeRefreshLayout() {
@@ -63,6 +65,9 @@ public class PlusPager extends BaseFragment implements BaseRecyclerViewAdapter.O
 
     @Override
     public View createView() {
+//        Bundle arguments = getArguments();
+//        mWidth = arguments.getInt(Constant.WIDTHPIXELS);
+
         final View view = View.inflate(getContext(), R.layout.fragment_stair_plus, null);
         ButterKnife.bind(this, view);
         mRecyclerview = (RecyclerView) view.findViewById(R.id.recyclerview);
@@ -71,11 +76,13 @@ public class PlusPager extends BaseFragment implements BaseRecyclerViewAdapter.O
             list.add(Constant.EMOJI[i]);
         }
         BaseRecyclerViewAdapter recyclerViewAdapter = new BaseRecyclerViewAdapter(list);
-        mRecyclerview.setLayoutManager(new GridLayoutManager(getContext(), 6, GridLayout.VERTICAL, false));
+        mRecyclerview.setLayoutManager(new GridLayoutManager(getContext(), Constant.EMOJI_LIE, GridLayout.VERTICAL, false));
         mRecyclerview.setAdapter(recyclerViewAdapter);
         recyclerViewAdapter.setOnItemClickListener(this);
 
-        mEdittext.setText("123456789");
+        mEdittext.setFocusable(true);
+        mEdittext.setFocusableInTouchMode(true);
+        mEdittext.requestFocus();
 
 
         mOnGlobalLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -113,6 +120,7 @@ public class PlusPager extends BaseFragment implements BaseRecyclerViewAdapter.O
 
     @Override
     public Object getData() {
+
         return "";
     }
 
@@ -169,12 +177,20 @@ public class PlusPager extends BaseFragment implements BaseRecyclerViewAdapter.O
         SpannableString spannableString = new SpannableString(mEmojis[position]);
         int id = getResources().getIdentifier("smiley_" + position, "mipmap", getContext().getPackageName());
         Drawable drawable = getResources().getDrawable(id);
-        drawable.setBounds(0, 0, 50, 50);
+        int bound = getBound();
+        drawable.setBounds(0, 0, bound, bound);
         ImageSpan imageSpan = new ImageSpan(drawable);
 
         spannableString.setSpan(imageSpan, 0, spannableString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         deleteSelected();
         mEdittext.getText().insert(mEdittext.getSelectionStart(), spannableString);
+    }
+
+    private int getBound() {
+        Paint paint = new Paint();
+        paint.setTextSize(getResources().getDimension(R.dimen.edittext_size));
+        Paint.FontMetrics fm = paint.getFontMetrics();
+        return (int) Math.ceil(fm.descent - fm.ascent);
     }
 
 
