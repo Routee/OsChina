@@ -3,6 +3,11 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
     <com.zssfw.oschina.ui.widget.DyRecycleView
         android:background="#f1f1f1"
         android:id="@+id/recycler_like"
@@ -11,4 +16,29 @@
 
     </com.zssfw.oschina.ui.widget.DyRecycleView>
 
+        <RelativeLayout
+            android:id="@+id/rl_trans"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/shape_like_frame"
+            android:layout_width="match_parent"
+            android:layout_height="48dp">
+            <EditText
+                android:paddingLeft="10dp"
+                android:id="@+id/et_like_send"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="60dp"
+                android:background="@drawable/select_like"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+            <ImageView
+                android:layout_marginTop="2dp"
+                android:layout_marginRight="10dp"
+                android:layout_alignParentRight="true"
+                android:src="@mipmap/photoface"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+        </RelativeLayout>
+    </RelativeLayout>
 </LinearLayout>
