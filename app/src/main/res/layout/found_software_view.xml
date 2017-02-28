@@ -8,10 +8,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <WebView
+        <com.zssfw.oschina.ui.pager.found.widget.MyWebView
             android:id="@+id/wv_found_software"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></WebView>
+            android:layout_height="match_parent"
+            ></com.zssfw.oschina.ui.pager.found.widget.MyWebView>
 
         <LinearLayout
             android:background="#fff"
