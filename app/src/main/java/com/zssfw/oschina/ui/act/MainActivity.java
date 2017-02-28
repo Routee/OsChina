@@ -11,7 +11,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.zssfw.oschina.R;
 import com.zssfw.oschina.ui.pager.dynamic.DynamicPager;
 import com.zssfw.oschina.ui.pager.found.FoundPager;
-import com.zssfw.oschina.ui.pager.mine.MinePager;
+import com.zssfw.oschina.ui.pager.found.mine.MinePager;
 import com.zssfw.oschina.ui.pager.multiple.MultiplePager;
 import com.zssfw.oschina.ui.pager.plus.BaseFragment;
 import com.zssfw.oschina.ui.pager.plus.PlusPager;

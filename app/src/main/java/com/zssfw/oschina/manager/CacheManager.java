@@ -3,7 +3,6 @@ package com.zssfw.oschina.manager;
 import android.os.Environment;
 import android.text.TextUtils;
 
-
 import com.zssfw.oschina.MyApplication;
 
 import java.io.File;
@@ -22,6 +21,7 @@ import java.security.NoSuchAlgorithmException;
 public class CacheManager {
     String dir = "";
 
+
     private CacheManager() {
         if (TextUtils.isEmpty(dir)) {
             dir = Environment.getExternalStorageDirectory().getPath() + File.separator + MyApplication.mContent.getPackageName() + File.separator + "cache";
@@ -30,6 +30,7 @@ public class CacheManager {
             if (!fileDir.exists()) {
                 fileDir.mkdirs();//创建多级目录时使用
             }
+
         }
     }
 
@@ -45,7 +46,7 @@ public class CacheManager {
         StringBuffer stringBuffer = new StringBuffer();
         FileInputStream fileInputStream =null;
         try {
-            File file = new File(dir, getFileName(url));
+            File  file = new File(dir, getFileName(url));
             fileInputStream = new FileInputStream(file);
             byte[] buffer = new byte[1024];
 
@@ -87,17 +88,16 @@ public class CacheManager {
         //File.separator跨平台的
         //有时候有些api在某些手机型号上面不能用,怎么处理,可以去判断当手操作系统型号
         FileOutputStream fileOutputStream =null;
+
         try {
-
-
-
             File file = new File(dir, getFileName(url));
-
             fileOutputStream =  new FileOutputStream(file);
             fileOutputStream.write(content.getBytes());
+            System.out.println("保存数据成功");
 
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("遇到异常了"+e.toString());
             //这里不需要返回
             //todo 可以写入到错误日志文件中
         }finally {

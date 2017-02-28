@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:background="#fff"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    
+    <ImageView
+        android:layout_gravity="center_horizontal"
+        android:src="@mipmap/mine_normal"
+        android:layout_marginTop="5dp"
+        android:id="@+id/qrcode_iv"
+        android:layout_width="250dp"
+        android:layout_height="250dp"/>
+
+    <TextView
+        android:layout_margin="10dp"
+        android:gravity="center_horizontal"
+        android:text="扫一扫上面的二维码,加我为好友\n(长按保存到本地)"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

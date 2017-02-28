@@ -1,4 +1,4 @@
-package com.zssfw.oschina.ui.pager.mine;
+package com.zssfw.oschina.ui.pager.found.mine;
 
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;

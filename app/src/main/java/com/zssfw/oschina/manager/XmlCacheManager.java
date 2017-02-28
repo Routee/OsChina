@@ -23,6 +23,7 @@ public class XmlCacheManager {
     public <T> T getXmlBean(String url, String username, String psw, Class<T> clss) {
         //1. 请求数据
         String content = HttpManager.getInstance().dataPost(url, username, psw);
+        System.out.println("ooooooo"+content);
         if (TextUtils.isEmpty(content)) {
             //空的
             //3.去本地获取数据
@@ -31,6 +32,7 @@ public class XmlCacheManager {
             //说明有
             //4.去本地保存数据
             CacheManager.getInstance().saveCacheData(url, content);
+            System.out.println("保存数据了");
 
         }
         if (TextUtils.isEmpty(content)) {
