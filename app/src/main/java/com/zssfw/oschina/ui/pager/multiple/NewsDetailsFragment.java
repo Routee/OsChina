@@ -60,7 +60,7 @@ public class NewsDetailsFragment extends BaseFragment implements View.OnKeyListe
         mListview_recomend = (ListView) view.findViewById(R.id.listview_recomend);
 
 
-        WebViewClient client = new WebViewClient() {
+                WebViewClient client = new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);

@@ -12,6 +12,7 @@
         android:layout_weight="1"
         android:background="@null"
         android:gravity="top"
+        android:textSize="@dimen/edittext_size"
         android:hint="今天想动弹什么?"
         android:padding="12dp"/>
 

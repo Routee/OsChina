@@ -13,7 +13,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.zssfw.oschina.R;
 import com.zssfw.oschina.ui.pager.dynamic.DynamicPager;
 import com.zssfw.oschina.ui.pager.found.FoundPager;
-import com.zssfw.oschina.ui.pager.mine.MinePager;
+import com.zssfw.oschina.ui.pager.found.mine.MinePager;
 import com.zssfw.oschina.ui.pager.multiple.MultiplePager;
 import com.zssfw.oschina.ui.pager.plus.BaseFragment;
 import com.zssfw.oschina.ui.pager.plus.PlusPager;
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.title)
     TextView            mTitle;
 
-    private String[]       button     = {"综合", "动弹", "发现", "我的"};
+    private String[]       button     = {"综合", "动弹", "弹一弹","发现", "我的"};
     private List<Fragment> mPagerList = new ArrayList<>();
     private MultiplePager mMultiplePager;
     private DynamicPager  mDynamicPager;
@@ -64,9 +64,9 @@ public class MainActivity extends AppCompatActivity {
     private void initButton() {
         BottomNavigationItem navigationItem0 = new BottomNavigationItem(R.mipmap.multiple_selected, button[0]);
         BottomNavigationItem navigationItem1 = new BottomNavigationItem(R.mipmap.dynamic_selected, button[1]);
-        BottomNavigationItem navigationItem4 = new BottomNavigationItem(R.mipmap.plus, null);
-        BottomNavigationItem navigationItem2 = new BottomNavigationItem(R.mipmap.found_selected, button[2]);
-        BottomNavigationItem navigationItem3 = new BottomNavigationItem(R.mipmap.mine_selected, button[3]);
+        BottomNavigationItem navigationItem4 = new BottomNavigationItem(R.mipmap.plus,button[2]);
+        BottomNavigationItem navigationItem2 = new BottomNavigationItem(R.mipmap.found_selected, button[3]);
+        BottomNavigationItem navigationItem3 = new BottomNavigationItem(R.mipmap.mine_selected, button[4]);
 
         mBottomNavigationBar.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
             @Override
