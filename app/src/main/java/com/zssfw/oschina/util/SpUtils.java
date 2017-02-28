@@ -66,6 +66,7 @@ public class SpUtils {
             e.printStackTrace();
         } finally {
             try {
+                if (objectInputStream!=null)
                 objectInputStream.close();
             } catch (IOException e) {
                 e.printStackTrace();

@@ -23,9 +23,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.zssfw.oschina.util.Constant.BUNDLE_MSG_ID;
+import static com.zssfw.oschina.util.Constant.HOST;
 import static com.zssfw.oschina.util.Constant.MESSAGE;
 import static com.zssfw.oschina.util.Constant.NEWS_DETAILS;
-import static com.zssfw.oschina.util.Constant.HOST;
 
 /**
  * Created by Administrator on 2017/2/24.
@@ -60,7 +60,7 @@ public class NewsDetailsFragment extends BaseFragment implements View.OnKeyListe
         mListview_recomend = (ListView) view.findViewById(R.id.listview_recomend);
 
 
-        WebViewClient client = new WebViewClient() {
+                WebViewClient client = new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);
@@ -133,7 +133,7 @@ public class NewsDetailsFragment extends BaseFragment implements View.OnKeyListe
                 @Override
                 public void onItemClick(int position) {
                     super.onItemClick(position);
-                    startShowActivity("资讯详情",aboutList.get(position).getCommentCount(),aboutList.get(position).getId(),NewsDetailsFragment.class);
+                    startShowActivity("资讯详情",aboutList.get(position).getCommentCount(),aboutList.get(position).getId(), NewsDetailsFragment.class);
                     System.out.println("跳转");
                 }
             };

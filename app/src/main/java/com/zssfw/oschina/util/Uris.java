@@ -16,4 +16,5 @@ public class Uris {
     public static final String FOUND_OSSW_RECOMMEND2  = "&searchTag=recommend&pageSize=20";
     public static final String FOUND_OSSW_CLASSIFY1 = "http://www.oschina.net/action/api/softwarecatalog_list?tag=0";
     public static final String FOUND_OSSW_SHAKE = "http://www.oschina.net/action/api/rock_rock";
+    public static final String SOFTWARE = "http://www.oschina.net/action/apiv2/software?ident=";
 }

@@ -1,10 +1,13 @@
 package com.zssfw.oschina.ui.pager.dynamic.dyfg;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -43,6 +46,15 @@ public class Mydy extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mView = View.inflate(getActivity(), R.layout.shard_recycle, null);
+        final SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) mView.findViewById(R.id.swipe_refresh);
+        swipeRefreshLayout.setColorSchemeColors(Color.parseColor("#fcfcfc"),Color.parseColor("#ff0000"),Color.parseColor("#0000fc"));
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                 SystemClock.sleep(2000);
+                 swipeRefreshLayout.setRefreshing(false);
+            }
+        });
         return mView;
     }
 
@@ -76,49 +88,4 @@ public class Mydy extends Fragment {
         });
     }
 
-
-/*
-    OkHttpClient okHttpClient = new OkHttpClient();
-    String uri = "http://www.oschina.net/action/apiv2/tweets?authorId=3292587";
-    Request request = new Request.Builder().url(uri).build();
-    okHttpClient.newCall(request).enqueue(new Callback() {
-        @Override
-        public void onFailure(Call call, IOException e) {
-
-        }
-
-        @Override
-        public void onResponse(Call call, Response response) throws IOException {
-            if (response.isSuccessful()) {
-                String string = response.body().string();
-                Gson gson = new Gson();
-                mShardBean = gson.fromJson(string, ShardBean.class);
-            }
-            mHandler.sendEmptyMessage(1);
-            System.out.println();
-
-        }
-    });
-    */
-
-
-  /*  public void setText() {
-        mTvName.setText(mShardBean.getResult().getAuthor().getName());
-        mTvDesc.setText(mShardBean.getResult().getContent());
-        mTvTime.setText(mShardBean.getResult().getPubDate());
-        mTvDot.setText(mShardBean.getResult().getStatistics().getFavCount());
-        mTvComment.setText(mShardBean.getResult().getStatistics().getLike());
-        mTvShard.setText(mShardBean.getResult().getStatistics().getComment());
-        Glide.with(mContent).load(Uri.parse(mShardBean.getResult().getAuthor().getPortrait())).asBitmap().centerCrop().into(new BitmapImageViewTarget(mIvHeadPic) {
-            @Override
-            protected void setResource(Bitmap resource) {
-                RoundedBitmapDrawable circularBitmapDrawable =
-                        RoundedBitmapDrawableFactory.create(mContent.getResources(), resource);
-                circularBitmapDrawable.setCircular(true);
-                mIvHeadPic.setImageDrawable(circularBitmapDrawable);
-
-            }
-        });
-    }
-*/
 }

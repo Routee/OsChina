@@ -1,10 +1,12 @@
 package com.zssfw.oschina.ui.act;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
@@ -15,6 +17,7 @@ import com.zssfw.oschina.ui.pager.found.mine.MinePager;
 import com.zssfw.oschina.ui.pager.multiple.MultiplePager;
 import com.zssfw.oschina.ui.pager.plus.BaseFragment;
 import com.zssfw.oschina.ui.pager.plus.PlusPager;
+import com.zssfw.oschina.util.Constant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +32,10 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationBar mBottomNavigationBar;
     @Bind(R.id.framelayout)
     FrameLayout         mFramelayout;
+    @Bind(R.id.title)
+    TextView            mTitle;
 
-    private String[]       button     = {"综合", "动弹", "发现", "我的"};
+    private String[]       button     = {"综合", "动弹", "弹一弹","发现", "我的"};
     private List<Fragment> mPagerList = new ArrayList<>();
     private MultiplePager mMultiplePager;
     private DynamicPager  mDynamicPager;
@@ -38,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private PlusPager     mPlusPager;
     private FoundPager    mFoundPager;
     private MinePager     mMinePager;
-
+    private int mLastPosition;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,21 +64,24 @@ public class MainActivity extends AppCompatActivity {
     private void initButton() {
         BottomNavigationItem navigationItem0 = new BottomNavigationItem(R.mipmap.multiple_selected, button[0]);
         BottomNavigationItem navigationItem1 = new BottomNavigationItem(R.mipmap.dynamic_selected, button[1]);
-        BottomNavigationItem navigationItem4 = new BottomNavigationItem(R.mipmap.plus, null);
-        BottomNavigationItem navigationItem2 = new BottomNavigationItem(R.mipmap.found_selected, button[2]);
-        BottomNavigationItem navigationItem3 = new BottomNavigationItem(R.mipmap.mine_selected, button[3]);
+        BottomNavigationItem navigationItem4 = new BottomNavigationItem(R.mipmap.plus,button[2]);
+        BottomNavigationItem navigationItem2 = new BottomNavigationItem(R.mipmap.found_selected, button[3]);
+        BottomNavigationItem navigationItem3 = new BottomNavigationItem(R.mipmap.mine_selected, button[4]);
 
         mBottomNavigationBar.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
             @Override
             public void onTabSelected(int position) {
-                System.out.println("---------" + position);
-
-
-                BaseFragment fragment = (BaseFragment) mPagerList.get(position);
-                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.framelayout, fragment);
+                if (position != 2) {
+                    mTitle.setText(button[position]);
+                    BaseFragment fragment = (BaseFragment) mPagerList.get(position);
+                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.framelayout, fragment);
                     fragmentTransaction.show(fragment).commit();
-
+                    mLastPosition = position;
+                } else {
+                    startTanActivity("弹一弹", -1, -1, PlusPager.class);
+                    mBottomNavigationBar.selectTab(mLastPosition);
+                }
             }
 
             @Override
@@ -117,6 +125,18 @@ public class MainActivity extends AppCompatActivity {
                 .replace(R.id.framelayout, mMultiplePager).show(mMultiplePager)
                 .commit();
 
+    }
+    public void startTanActivity(String title, int comment,int id, Class<? extends BaseFragment> fragmentClass) {
+        Bundle bundle = new Bundle();
+        bundle.putString(Constant.BUNDLE_MSG_TITLE,title );
+        bundle.putInt(Constant.BUNDLE_MSG_COMMENT,comment);
+        bundle.putInt(Constant.BUNDLE_MSG_ID,id);
+
+
+        Intent intent = new Intent(MainActivity.this, TanActivity.class);
+        intent.putExtra(Constant.INTENT_CLASS,fragmentClass );
+        intent.putExtra(Constant.BUNDLE, bundle);
+        startActivity(intent);
     }
 
 }

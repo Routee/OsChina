@@ -1,5 +1,6 @@
 package com.zssfw.oschina.ui.pager.dynamic.dyfg;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -42,18 +43,15 @@ public class DYtbViewpage extends Fragment {
         init(view);
         return view;
     }
-
     private void init(View view) {
         mTabLayout = (TabLayout) view.findViewById(R.id.tablayout_dy);
         mViewPager = (ViewPager) view.findViewById(R.id.viewpager_dy);
         TbViewPAdapter tbViewPAdapter = new TbViewPAdapter(getActivity().getSupportFragmentManager());
         mViewPager.setAdapter(tbViewPAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
-
+        mTabLayout.setTabTextColors(Color.parseColor("#60000000"),Color.parseColor("#ec23a016"));
+        mTabLayout.setSelectedTabIndicatorColor(Color.GRAY);
     }
-
-
-
     private class TbViewPAdapter extends FragmentPagerAdapter {
 
         public TbViewPAdapter(FragmentManager fm) {
@@ -74,6 +72,8 @@ public class DYtbViewpage extends Fragment {
         public CharSequence getPageTitle(int position) {
             return mListData.get(position).mTitle;
         }
+
     }
+
 
 }
