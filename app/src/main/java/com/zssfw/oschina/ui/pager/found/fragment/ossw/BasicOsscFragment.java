@@ -1,19 +1,24 @@
 package com.zssfw.oschina.ui.pager.found.fragment.ossw;
 
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.zssfw.oschina.R;
+import com.zssfw.oschina.ui.act.FoundShowActivity;
 import com.zssfw.oschina.ui.pager.found.SwpipeListViewOnScrollListener;
 import com.zssfw.oschina.ui.pager.found.adapter.OsswListAdapter;
 import com.zssfw.oschina.ui.pager.found.bean.DomesticBean;
+import com.zssfw.oschina.ui.pager.found.fragment.SoftWareDetailsFragment;
 import com.zssfw.oschina.ui.pager.found.manager.XmlCacheTool;
 import com.zssfw.oschina.ui.pager.plus.BaseFragment;
+import com.zssfw.oschina.util.Constant;
 import com.zssfw.oschina.util.Util;
 
 import java.util.ArrayList;
@@ -59,7 +64,7 @@ public abstract class BasicOsscFragment extends BaseFragment implements PullToRe
         });
         mLv = mPtrl.getRefreshableView();
         mLv.setAdapter(mAdapter);
-
+        mLv.setOnItemClickListener(new mOnItemClickListener());
         return view;
     }
 
@@ -123,5 +128,18 @@ public abstract class BasicOsscFragment extends BaseFragment implements PullToRe
         mSelectPage.showPage();
         mSrl.setRefreshing(false);
         state = NONE;
+    }
+
+    private class mOnItemClickListener implements AdapterView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            String url = mShowItems.get(position - 1).getUrl().get(0);
+            Intent intent = new Intent(getContext(), FoundShowActivity.class);
+            intent.putExtra(Constant.FOUNDTITLE, "软件详情");
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra(Constant.FOUNDFRAGMENT, SoftWareDetailsFragment.class);
+            intent.putExtra(Constant.SOFTWARENAME, url);
+            startActivity(intent);
+        }
     }
 }

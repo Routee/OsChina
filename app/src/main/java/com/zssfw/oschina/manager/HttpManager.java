@@ -1,5 +1,7 @@
 package com.zssfw.oschina.manager;
 
+import android.util.Log;
+
 import java.io.IOException;
 
 import okhttp3.FormBody;
@@ -35,6 +37,7 @@ public class HttpManager {
             return response.body().string();
         } catch (Exception e) {
             e.printStackTrace();
+            Log.d("aaaaaaaaaaaaaaa", "dataGet: "+e.toString());
             System.out.println("HttpManager"+e.toString());
             //todo 在异常的时候一定要返回一个空的对象
             return null;

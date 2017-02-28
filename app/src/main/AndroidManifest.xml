@@ -27,15 +27,16 @@
         <activity android:name=".ui.act.WebActivity">
         </activity>
         <activity android:name=".util.GlobalActivity"/>
-        <activity android:name=".ui.act.ShowActivity"></activity>
+        <activity android:name=".ui.act.ShowActivity"/>
         <activity
             android:name="zxing.android.CaptureActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar"/>
         <activity android:name=".ui.act.DYActivity">
         </activity>
-        <activity android:name=".ui.act.TanActivity"
-                  android:windowSoftInputMode="stateVisible|adjustResize">
+        <activity
+            android:name=".ui.act.TanActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize">
         </activity>
         <activity
             android:name="zxing.android.CaptureActivity"
@@ -44,6 +45,8 @@
         <activity android:name=".ui.pager.found.activity.FoundSearchFriendActivity">
         </activity>
         <activity android:name=".ui.pager.dynamic.dyfg.WebActivity">
+        </activity>
+        <activity android:name=".ui.pager.found.activity.FoundFriendDetailsActivity">
         </activity>
     </application>
 

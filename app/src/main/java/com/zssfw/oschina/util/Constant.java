@@ -34,6 +34,7 @@ public class Constant {
     public static final int       SCANREQUESTCODE = 40;
     public static final String WIDTHPIXELS        = "widthpixels";
     public static final int EMOJI_LIE             = 7;
+    public static final String FRIENDDETAILS      = "FOUND_FRIEND_DETAILS";
     public static  int widthpixels                = 0;
     public static String ONFILE_NAME              = "dynamicList1";
     public static int    ITEM_FRAG1               = -1;
