@@ -43,6 +43,7 @@ public class CacheManager {
     //从本地获取数据
     //返回的结果String,参数url
     public String getCacheData(String url) {
+
         StringBuffer stringBuffer = new StringBuffer();
         FileInputStream fileInputStream =null;
         try {
