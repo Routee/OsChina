@@ -48,6 +48,7 @@ public class DYtbViewpage extends Fragment {
         mViewPager = (ViewPager) view.findViewById(R.id.viewpager_dy);
         TbViewPAdapter tbViewPAdapter = new TbViewPAdapter(getActivity().getSupportFragmentManager());
         mViewPager.setAdapter(tbViewPAdapter);
+        mViewPager.setCurrentItem(2,false);
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.setTabTextColors(Color.parseColor("#60000000"),Color.parseColor("#ec23a016"));
         mTabLayout.setSelectedTabIndicatorColor(Color.GRAY);

@@ -41,6 +41,7 @@ public class HttpManager {
         }
     }
 
+
     public String dataPost(String url,String username,String password) {
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder().build();
@@ -53,11 +54,8 @@ public class HttpManager {
                 .url(url)
                 .post(body)
                 .build();
-        Response response = null;
         try {
-            response = okHttpClient.newCall(request).execute();
-            System.out.println(response.body().string()+"123123123");
-
+            Response response = okHttpClient.newCall(request).execute();
             return response.body().string();
         } catch (IOException e) {
             e.printStackTrace();

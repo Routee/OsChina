@@ -1,4 +1,4 @@
-package com.zssfw.oschina.ui.pager.mine;
+package com.zssfw.oschina.ui.pager.found.mine;
 
 import android.content.Context;
 import android.content.SharedPreferences;

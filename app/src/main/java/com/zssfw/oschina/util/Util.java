@@ -1,5 +1,7 @@
 package com.zssfw.oschina.util;
 
+import android.content.res.Resources;
+
 import com.zssfw.oschina.MyApplication;
 
 import java.text.ParseException;
@@ -83,6 +85,15 @@ public class Util {
         Date nowDate = new Date();
         String now = sdf.format(nowDate);
         return getDay(now).equals(getDay(pubDate));
+    }
+    public static int getDimens(int resId)
+    {
+
+        return getResources().getDimensionPixelSize(resId);
+    }
+    public static Resources getResources()
+    {
+        return MyApplication.mContent.getResources();
     }
 
 }
