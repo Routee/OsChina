@@ -80,5 +80,19 @@
             android:layout_height="match_parent">
 
         </com.zssfw.oschina.ui.widget.MyListView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/bg_gray"
+            android:padding="10dp"
+            android:text="热门评论"
+            android:id="@+id/textView_comment"/>
+
+        <com.zssfw.oschina.ui.widget.MyListView
+            android:id="@+id/listview_comment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </com.zssfw.oschina.ui.widget.MyListView>
     </LinearLayout>
 </ScrollView>
