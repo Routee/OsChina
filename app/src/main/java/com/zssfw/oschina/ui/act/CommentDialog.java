@@ -1,6 +1,7 @@
 package com.zssfw.oschina.ui.act;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.Gravity;
@@ -11,8 +12,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.zssfw.oschina.MyApplication;
 import com.zssfw.oschina.R;
+import com.zssfw.oschina.ui.pager.found.mine.LoginFragment;
 import com.zssfw.oschina.ui.pager.multiple.NewsDetailsFragment;
+import com.zssfw.oschina.util.Constant;
+import com.zssfw.oschina.util.GlobalActivity;
 import com.zssfw.oschina.util.SPUtil;
 
 import java.io.IOException;
@@ -107,7 +112,13 @@ public class CommentDialog extends Dialog implements SwipeRefreshLayout.OnRefres
 
 
                 if (mCookie == "") {
-                    Toast.makeText(getContext(), mId+"", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "请先登录", Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(MyApplication.mContent, GlobalActivity.class);
+                    //  Bundle bundle = new Bundle();
+                    intent.putExtra(Constant.FRAGMENTNAME, LoginFragment.class);
+                    MyApplication.mContent.startActivity(intent);
+
                 } else {
                     if (etText.isEmpty()) {
                         Toast.makeText(getContext(), "亲,回复是空的", Toast.LENGTH_SHORT).show();

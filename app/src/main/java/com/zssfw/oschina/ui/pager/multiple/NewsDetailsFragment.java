@@ -65,6 +65,8 @@ public class NewsDetailsFragment extends BaseFragment implements View.OnKeyListe
     private ListView        mListview_soft;
     private ListView        mListview_recomend;
     private NewsCommentBean mNewsCommentBean;
+    private TextView mTv_comment;
+    private int mId1;
 
 
     @Override
@@ -175,7 +177,7 @@ public class NewsDetailsFragment extends BaseFragment implements View.OnKeyListe
             mListview_recomend.setAdapter(recommendAdapter);
 
             //热门评论
-            List<NewsCommentBean.ResultBean.ItemsBean> commentList = mNewsCommentBeanResult.getItems();
+            final List<NewsCommentBean.ResultBean.ItemsBean> commentList = mNewsCommentBeanResult.getItems();
             FinalListAdapter<NewsCommentBean.ResultBean.ItemsBean> itemsBeanFinalListAdapter = new
                     FinalListAdapter<NewsCommentBean.ResultBean.ItemsBean>(commentList, R.layout.news_comment_item, new FinalListAdapter.OnFinalListAdapterListener<NewsCommentBean.ResultBean.ItemsBean>() {
                 @Override
@@ -184,23 +186,22 @@ public class NewsDetailsFragment extends BaseFragment implements View.OnKeyListe
                     holder.setText(R.id.comment_tv_name, item.getAuthor());
                     holder.setText(R.id.comment_tv_desc, item.getContent());
                     holder.setText(R.id.comment_tv_time, Util.parseTime(item.getPubDate()));
-                    TextView tv_comment = (TextView) holder.getView(R.id.comment_tv_comment);
+                    mTv_comment = (TextView) holder.getView(R.id.comment_tv_comment);
 
-                    tv_comment.setOnClickListener(new View.OnClickListener() {
+                    mTextViewComment.setOnClickListener(new View.OnClickListener() {
                         @Override
-                        public void onClick(View view) {
-                            //回复个人
-                            int id = mDetailsBean.getResult().getId();
-                            System.out.println("id===="+id);
-                            Dialog dialog =new CommentDialog(NewsDetailsFragment.this,id);
+                        public void onClick(View v) {
+                            Dialog dialog =new CommentDialog(NewsDetailsFragment.this,mId1);
                             dialog.show();
                         }
                     });
+
                     mEtComment.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             //回复文章
                             int id = mDetailsBean.getResult().getId();
+                            System.out.println("id11===="+id);
                             Dialog dialog =new CommentDialog(NewsDetailsFragment.this,id);
                             dialog.show();
                         }
@@ -219,8 +220,33 @@ public class NewsDetailsFragment extends BaseFragment implements View.OnKeyListe
                 }
 
 
-            });
+            }){
+                        @Override
+                        public void onItemClick(final int position) {
+                            super.onItemClick(position);
+//                            mTv_comment.setOnClickListener(new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View view) {
+//                                    //回复个人
+//                                    int id1 = commentList.get(position).getId();
+//
+//
+//
+//                                    System.out.println("id===="+id1);
+//
+//                                    //                            Dialog dialog =new CommentDialog(NewsDetailsFragment.this, android.R.attr.id);
+//                                    //                            dialog.show();
+//                                }
+//                            });
+
+                            mId1 = commentList.get(position).getId();
+                            Dialog dialog =new CommentDialog(NewsDetailsFragment.this,mId1);
+                            dialog.show();
+                            System.out.println("id===="+ mId1);
+                        }
+                    };
             mListviewComment.setAdapter(itemsBeanFinalListAdapter);
+
         }
     };
 
