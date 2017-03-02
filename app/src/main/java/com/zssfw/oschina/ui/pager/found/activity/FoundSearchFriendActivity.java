@@ -108,9 +108,9 @@ public class FoundSearchFriendActivity extends AppCompatActivity implements Sear
                     public void onClick(View v) {
                         String id = mShowItems.get(position).getUid().get(0);
                         String name = mShowItems.get(position).getName().get(0);
-                        String url = Uris.FOUND_FRIEND1 + name + Uris.FOUND_FRIEND2 + id;
                         Intent intent = new Intent(getApplicationContext(), FoundFriendDetailsActivity.class);
-                        intent.putExtra(Constant.FRIENDDETAILS, url);
+                        intent.putExtra(Constant.FRIENDDETAILS_NAME, name);
+                        intent.putExtra(Constant.FRIENDDETAILS_ID, id);
                         startActivity(intent);
                     }
                 });

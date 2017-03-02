@@ -17,7 +17,8 @@ public class Uris {
     public static final String FOUND_OSSW_CLASSIFY1 = "http://www.oschina.net/action/api/softwarecatalog_list?tag=0";
     public static final String FOUND_OSSW_SHAKE = "http://www.oschina.net/action/api/rock_rock";
     public static final String SOFTWARE = "http://www.oschina.net/action/apiv2/software?ident=";
-    public static final String FOUND_FRIEND1 = "http://www.oschina.net/action/api/user_information?pageIndex=0&hisname=";
-    public static final String FOUND_FRIEND2 = "&uid=0&pageSize=20&hisuid=";
-
+    public static final String FOUND_FRIEND1 = "http://www.oschina.net/action/api/user_information?pageIndex=";
+    public static final String FOUND_FRIEND2 = "&hisname=";
+    public static final String FOUND_FRIEND3 = "&uid=0&pageSize=20&hisuid=";
+    public static final String FOUND_FRIENDINFO_LISTITEM = "http://www.oschina.net/action/apiv2/question?id=";
 }
