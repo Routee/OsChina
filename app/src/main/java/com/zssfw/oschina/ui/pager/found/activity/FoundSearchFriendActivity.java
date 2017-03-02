@@ -1,5 +1,6 @@
 package com.zssfw.oschina.ui.pager.found.activity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
@@ -18,6 +19,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
@@ -25,6 +27,7 @@ import com.zssfw.oschina.R;
 import com.zssfw.oschina.manager.HttpManager;
 import com.zssfw.oschina.ui.pager.found.bean.FoundUserBean;
 import com.zssfw.oschina.ui.pager.found.utils.Xml2JsonUtil;
+import com.zssfw.oschina.util.Constant;
 import com.zssfw.oschina.util.GsonUtil;
 import com.zssfw.oschina.util.Uris;
 import com.zssfw.oschina.util.Util;
@@ -38,8 +41,8 @@ public class FoundSearchFriendActivity extends AppCompatActivity implements Sear
     private RecyclerView                                       mRv;
     private ImageView                                          mIv;
     private List<FoundUserBean.OschinaBean.UsersBean.UserBean> mShowItems;
-    private RecyclerView.Adapter mAdapter;
-    private Animation mAnim;
+    private RecyclerView.Adapter                               mAdapter;
+    private Animation                                          mAnim;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +69,7 @@ public class FoundSearchFriendActivity extends AppCompatActivity implements Sear
             }
 
             @Override
-            public void onBindViewHolder(RecyclerView.ViewHolder hold, int position) {
+            public void onBindViewHolder(RecyclerView.ViewHolder hold, final int position) {
                 final UserViewHolder holder = (UserViewHolder) hold;
                 try {
                     Glide.with(getApplicationContext()).load(mShowItems.get(position).getPortrait().get(0)).asBitmap().centerCrop().into(new BitmapImageViewTarget(holder.mIvHead) {
@@ -100,6 +103,17 @@ public class FoundSearchFriendActivity extends AppCompatActivity implements Sear
                 } catch (Exception e) {
                     holder.mTvDestination.setText("");
                 }
+                hold.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String id = mShowItems.get(position).getUid().get(0);
+                        String name = mShowItems.get(position).getName().get(0);
+                        Intent intent = new Intent(getApplicationContext(), FoundFriendDetailsActivity.class);
+                        intent.putExtra(Constant.FRIENDDETAILS_NAME, name);
+                        intent.putExtra(Constant.FRIENDDETAILS_ID, id);
+                        startActivity(intent);
+                    }
+                });
             }
 
             @Override
@@ -153,6 +167,12 @@ public class FoundSearchFriendActivity extends AppCompatActivity implements Sear
 
     @Override
     public boolean onQueryTextChange(final String newText) {
+        if (TextUtils.isEmpty(newText)) {
+            Toast.makeText(this, "请输入用户名", Toast.LENGTH_SHORT).show();
+            //            mShowItems.clear();
+            mAdapter.notifyDataSetChanged();
+            return true;
+        }
         mIv.setVisibility(View.VISIBLE);
         mIv.startAnimation(mAnim);
         if (mShowItems != null) {
@@ -182,4 +202,5 @@ public class FoundSearchFriendActivity extends AppCompatActivity implements Sear
         }).start();
         return true;
     }
+
 }

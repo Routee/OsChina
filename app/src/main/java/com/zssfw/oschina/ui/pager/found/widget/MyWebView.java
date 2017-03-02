@@ -57,10 +57,6 @@ public class MyWebView extends WebView {
         return super.onTouchEvent(ev);
     }
 
-    public OnScrollListener getmOnScrollListener() {
-        return mOnScrollListener;
-    }
-
     public void setmOnScrollListener(OnScrollListener mOnScrollListener) {
         this.mOnScrollListener = mOnScrollListener;
     }
@@ -79,10 +75,9 @@ public class MyWebView extends WebView {
     public interface OnScrollListener {
 
 
-        public void showOrHide(boolean show);
+        void showOrHide(boolean show);
 
-        public void onScrolled(int l, int t, int oldl, int oldt);
+        void onScrolled(int l, int t, int oldl, int oldt);
 
     }
-
-} 
+}

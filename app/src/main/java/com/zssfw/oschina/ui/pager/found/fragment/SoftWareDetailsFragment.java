@@ -9,6 +9,9 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -61,7 +64,17 @@ public class SoftWareDetailsFragment extends BaseFragment implements MyWebView.O
         }
         View view = LayoutInflater.from(getContext()).inflate(R.layout.found_software_view, null);
         mWebView = (MyWebView) view.findViewById(R.id.wv_found_software);
-        mLinearLayout = (LinearLayout) view.findViewById(R.id.ll_bottom);
+
+        WebSettings settings = mWebView.getSettings();
+//        settings.setJavaScriptEnabled(true);        //设置js可用
+        settings.setBuiltInZoomControls(true);      //显示缩放按钮
+        settings.setUseWideViewPort(true);          //支持双击缩放
+
+        mWebView.setWebViewClient(new WebViewClient());
+        mWebView.setWebChromeClient(new WebChromeClient());
+
+
+                mLinearLayout = (LinearLayout) view.findViewById(R.id.ll_bottom);
         mTvComment = (TextView) view.findViewById(R.id.tv_comment);
         mTvCollect = (TextView) view.findViewById(R.id.tv_collect);
         mTvShare = (TextView) view.findViewById(R.id.tv_share);
@@ -200,6 +213,7 @@ public class SoftWareDetailsFragment extends BaseFragment implements MyWebView.O
             showView.startAnimation(mHiddenAction);
         }
     }
+
 }
 
 
