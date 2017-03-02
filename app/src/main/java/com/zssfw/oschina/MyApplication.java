@@ -14,10 +14,12 @@ public class MyApplication extends Application {
     public static Context mContent;
     public static Handler mHandler;
 
+
     @Override
     public void onCreate() {
         super.onCreate();
         mContent = this;
         mHandler = new Handler();
+
     }
 }

@@ -1,5 +1,6 @@
 package com.zssfw.oschina.ui.pager.multiple;
 
+import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -23,6 +25,7 @@ import com.zssfw.oschina.adapter.FinalListAdapter;
 import com.zssfw.oschina.bean.NewsCommentBean;
 import com.zssfw.oschina.bean.NewsDetailsBean;
 import com.zssfw.oschina.manager.JsonCacheManager;
+import com.zssfw.oschina.ui.act.CommentDialog;
 import com.zssfw.oschina.ui.pager.plus.BaseFragment;
 import com.zssfw.oschina.ui.widget.MyListView;
 import com.zssfw.oschina.util.Util;
@@ -50,6 +53,8 @@ public class NewsDetailsFragment extends BaseFragment implements View.OnKeyListe
     TextView   mTextViewComment;
     @Bind(R.id.listview_comment)
     MyListView mListviewComment;
+    @Bind(R.id.et_comment)
+    EditText   mEtComment;
     private List<NewsDetailsBean.ResultBean.AboutsBean> aboutsBeen  = new ArrayList<>();
     private List<NewsCommentBean.ResultBean.ItemsBean>  commentItem = new ArrayList<>();
     private NewsDetailsBean mDetailsBean;
@@ -98,12 +103,12 @@ public class NewsDetailsFragment extends BaseFragment implements View.OnKeyListe
     public Object getData() {
         Bundle bundle = getArguments();
         int id = bundle.getInt(BUNDLE_MSG_ID);
-//        int type=bundle.getInt(BUNDLE_MSG_TYPE);
+        //        int type=bundle.getInt(BUNDLE_MSG_TYPE);
         mDetailsBean = JsonCacheManager.getInstance().getCacheBean(HOST + NEWS_DETAILS + id, NewsDetailsBean.class);
 
         mNewsCommentBean = JsonCacheManager.getInstance()
-                .getCacheBean(HOST + NEWS_COMMENT+id+"&type=6", NewsCommentBean.class);
-//        "/action/apiv2/comment?parts=refer,reply&sourceId=77953&type=6"
+                .getCacheBean(HOST + NEWS_COMMENT + id + "&type=6", NewsCommentBean.class);
+        //        "/action/apiv2/comment?parts=refer,reply&sourceId=77953&type=6"
 
         if (mDetailsBean.getMessage().equalsIgnoreCase(MESSAGE)) {
             aboutsBeen.addAll(mDetailsBean.getResult().getAbouts());
@@ -123,6 +128,7 @@ public class NewsDetailsFragment extends BaseFragment implements View.OnKeyListe
         public void run() {
             NewsDetailsBean.ResultBean resultBean = mDetailsBean.getResult();
             NewsCommentBean.ResultBean mNewsCommentBeanResult = mNewsCommentBean.getResult();
+
             mTv_title.setText(resultBean.getTitle());
             mTv_time.setText(mDetailsBean.getTime());
             mWebview.loadData(resultBean.getBody(), "text/html;charset=UTF-8", null);
@@ -170,13 +176,36 @@ public class NewsDetailsFragment extends BaseFragment implements View.OnKeyListe
 
             //热门评论
             List<NewsCommentBean.ResultBean.ItemsBean> commentList = mNewsCommentBeanResult.getItems();
-            FinalListAdapter<NewsCommentBean.ResultBean.ItemsBean> itemsBeanFinalListAdapter = new FinalListAdapter<>(commentList, R.layout.news_comment_item, new FinalListAdapter.OnFinalListAdapterListener<NewsCommentBean.ResultBean.ItemsBean>() {
+            FinalListAdapter<NewsCommentBean.ResultBean.ItemsBean> itemsBeanFinalListAdapter = new
+                    FinalListAdapter<NewsCommentBean.ResultBean.ItemsBean>(commentList, R.layout.news_comment_item, new FinalListAdapter.OnFinalListAdapterListener<NewsCommentBean.ResultBean.ItemsBean>() {
                 @Override
-                public void bindView(FinalListAdapter.FinalListViewHolder holder, NewsCommentBean.ResultBean.ItemsBean item) {
+                public void bindView(FinalListAdapter.FinalListViewHolder holder, final NewsCommentBean.ResultBean.ItemsBean item) {
 
                     holder.setText(R.id.comment_tv_name, item.getAuthor());
                     holder.setText(R.id.comment_tv_desc, item.getContent());
                     holder.setText(R.id.comment_tv_time, Util.parseTime(item.getPubDate()));
+                    TextView tv_comment = (TextView) holder.getView(R.id.comment_tv_comment);
+
+                    tv_comment.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            //回复个人
+                            int id = mDetailsBean.getResult().getId();
+                            System.out.println("id===="+id);
+                            Dialog dialog =new CommentDialog(NewsDetailsFragment.this,id);
+                            dialog.show();
+                        }
+                    });
+                    mEtComment.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            //回复文章
+                            int id = mDetailsBean.getResult().getId();
+                            Dialog dialog =new CommentDialog(NewsDetailsFragment.this,id);
+                            dialog.show();
+                        }
+                    });
+
                     final ImageView holderView = (ImageView) holder.getView(R.id.comment_iv_head_pic);
                     Glide.with(getContext()).load(item.getAuthorPortrait()).asBitmap().centerCrop().into(new BitmapImageViewTarget(holderView) {
                         @Override
@@ -211,6 +240,7 @@ public class NewsDetailsFragment extends BaseFragment implements View.OnKeyListe
         }
         return false;
     }
+
 
 
 }

@@ -39,4 +39,21 @@
         <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
         <item name="android:backgroundDimEnabled">true</item>
     </style>
+    <!--回复对话框样式-->
+    <style name="report_comment_dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@color/status_text</item>
+
+    </style>
+    <!--1、添加style-->
+    <!--<style name="Dialog_FS">-->
+        <!--<item name="android:windowFullscreen">true</item>-->
+        <!--<item name="android:windowNoTitle">true</item>-->
+    <!--</style>-->
+    <!--2、代码里面设置dialog的样式-->
+    <!--Dialog dialog = new Dialog(this,R.style.Dialog_FS); //设置全屏样式-->
+    <!--dialog.setContentView(R.layout.main); //设置dialog的布局-->
+    <!--dialog.show();//显示dialog界面-->
+
 </resources>
