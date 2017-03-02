@@ -32,17 +32,40 @@
                 app:layout_collapseMode="parallax"
                 app:layout_collapseParallaxMultiplier="0.7"/>
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:src="@mipmap/ic_launcher"
-                android:layout_height="match_parent"/>
+            <include
+                layout="@layout/view_found_friendinfo_title"/>
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:theme="@style/Base.ThemeOverlay.AppCompat.Dark"/>
+                app:theme="@style/Base.ThemeOverlay.AppCompat.Dark">
+                
+                <LinearLayout
+                    android:visibility="invisible"
+                    android:layout_width="wrap_content"
+                    android:orientation="horizontal"
+                    android:id="@+id/ll_tb_collapsed"
+                    android:gravity="center_vertical"
+                    android:layout_height="match_parent">
+
+                    <com.zssfw.oschina.ui.pager.found.widget.CircleImageView
+                        android:layout_width="36dp"
+                        android:id="@+id/iv_tb_avandar"
+                        android:layout_height="36dp"/>
+
+                    <TextView
+                        android:textColor="#fff"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:id="@+id/tv_tb_title"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+                
+                </android.support.v7.widget.Toolbar>
         </android.support.design.widget.CollapsingToolbarLayout>
 
     </android.support.design.widget.AppBarLayout>

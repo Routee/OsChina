@@ -6,6 +6,15 @@
               android:orientation="horizontal"
               android:padding="10dp">
 
+    <TextView
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:id="@+id/tv_none"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:text="没有更多数据了"
+        android:layout_height="wrap_content"/>
+
     <com.zssfw.oschina.ui.pager.found.widget.CircleImageView
         android:id="@+id/iv_avatar"
         android:layout_width="50dp"
