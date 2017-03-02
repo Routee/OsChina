@@ -65,6 +65,10 @@ public class NewsFragment extends BaseFragment implements RadioGroup.OnCheckedCh
     private NewsHeadAdapter                                     mNewsHeadAdapter;
     private FinalListAdapter<NewsBodyBean.ResultBean.ItemsBean> mNewsBodyAdapter;
     private String                                              mNextPageToken;
+    private int mDownX;
+    private int mDownY;
+    private int mEX;
+    private int mEY;
 
 
     @Override
@@ -303,11 +307,27 @@ public class NewsFragment extends BaseFragment implements RadioGroup.OnCheckedCh
         System.out.println("轮播开始");
     }
 
+
     @Override//viewpager 触摸事件
     public boolean onTouch(View v, MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
+                mDownX = (int) event.getX();
+                mDownY = (int) event.getY();
                 mHandler.removeCallbacks(mRunnable);
+
+                break;
+            case MotionEvent.ACTION_MOVE:
+                mEX = (int) event.getX();
+                mEY = (int) event.getY();
+                int diffX=mEX-mDownX;
+                int diffY=mEY-mDownY;
+                int diffXY=Math.abs(diffX)-Math.abs(diffY);
+                if (diffXY >= 0) {
+                    mSwipeRefreshLayout.setEnabled(false);
+                } else {
+                    mSwipeRefreshLayout.setEnabled(true);
+                }
                 break;
             case MotionEvent.ACTION_UP:
                 mHandler.postDelayed(mRunnable, 2000);

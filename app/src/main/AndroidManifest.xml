@@ -48,8 +48,11 @@
         </activity>
         <activity android:name=".ui.pager.found.activity.FoundFriendDetailsActivity">
         </activity>
-        <activity android:name=".ui.pager.dynamic.dyfg.MyDialogActivity"
+        <activity
+            android:name=".ui.pager.dynamic.dyfg.MyDialogActivity"
             android:theme="@style/like_dialog">
+        </activity>
+        <activity android:name=".ui.act.ReportCommentActivity">
         </activity>
     </application>
 

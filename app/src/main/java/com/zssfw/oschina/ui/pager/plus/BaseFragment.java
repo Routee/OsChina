@@ -39,6 +39,7 @@ public abstract class BaseFragment extends Fragment {
                     return getSwipeRefreshLayout();
                 }
 
+
                 @Override
                 public Object getNetData() {
                     return getData();
