@@ -49,6 +49,7 @@ public class Constant {
     public static final String BUNDLE_MSG_TITLE   = "bundle_msg_title";
     public static final String BUNDLE_MSG_COMMENT = "bundle_msg_comment";
     public static final String BUNDLE_MSG_ID = "bundle_msg_id";
+    public static final String BUNDLE_MSG_TYPE = "bundle_msg_type";
     public static final String BUNDLE_MSG_URL = "bundle_msg_url";
     public static final String BUNDLE             = "bundle";
     public static final String INTENT_CLASS       = "intent_class";
@@ -56,6 +57,9 @@ public class Constant {
     //----资讯
 
     public static final String   NEWS_DETAILS   = "/action/apiv2/news?id=";
+//    public static final String   NEWS_COMMENT   = "/action/apiv2/comment?parts=refer,reply&sourceId=77953&type=6";
+    public static final String   NEWS_COMMENT   = "/action/apiv2/comment?parts=refer,reply&sourceId=";
+
 
     public static int[] EMOJI  = new int[]{
             R.mipmap.smiley_0,
