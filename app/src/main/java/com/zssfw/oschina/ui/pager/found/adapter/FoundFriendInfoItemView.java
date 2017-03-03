@@ -19,14 +19,14 @@ import com.zssfw.oschina.ui.pager.found.widget.CircleImageView;
  * Created by Routee on 2017/3/1.
  */
 public class FoundFriendInfoItemView extends RecyclerView.ViewHolder {
-    private CircleImageView mIvAvatar;
-    private TextView        mTvName;
-    private TextView        mTvSpanTopic;
-    private TextView        mTvDsc;
-    private TextView        mTvTime;
-    private TextView        mTvComments;
-    private int type;
-    private final TextView mTvNone;
+    private       CircleImageView mIvAvatar;
+    private       TextView        mTvName;
+    private       TextView        mTvSpanTopic;
+    private       TextView        mTvDsc;
+    private       TextView        mTvTime;
+    private       TextView        mTvComments;
+    private       int             type;
+    private final TextView        mTvNone;
 
     public FoundFriendInfoItemView(View itemView, int foot) {
         super(itemView);
@@ -60,12 +60,12 @@ public class FoundFriendInfoItemView extends RecyclerView.ViewHolder {
         mTvName.setText(bean.getAuthor().get(0));
         String typeHead = "";
         String typeFoot = "";
-        switch (Integer.parseInt(bean.getCatalog().get(0))) {
-            case 0:
+        switch (Integer.parseInt(bean.getObjecttype().get(0))) {
+            case 16:
                 typeHead = "在新闻:";
                 typeFoot = "发表评论";
                 break;
-            case 1:
+            case 17:
                 typeHead = "回答了问题:";
                 typeFoot = "";
                 break;
@@ -73,12 +73,15 @@ public class FoundFriendInfoItemView extends RecyclerView.ViewHolder {
                 typeHead = "发表了新话题:";
                 typeFoot = "";
                 break;
-            case 3:
+            case 4:
                 typeHead = "发表了一篇新闻";
                 typeFoot = "";
                 break;
             default:
+                typeHead = "在话题:";
+                typeFoot = "中,如是说:";
                 break;
+
         }
         try {
             String title = bean.getObjecttitle().get(0);

@@ -9,7 +9,7 @@ import com.zssfw.oschina.R;
 import com.zssfw.oschina.adapter.MultipleAdapter;
 import com.zssfw.oschina.bean.FragmentBean;
 import com.zssfw.oschina.ui.act.FoundShowActivity;
-import com.zssfw.oschina.ui.pager.found.fragment.ossw.ClassfyFragment;
+import com.zssfw.oschina.ui.pager.found.fragment.ossw.ClassfyFragment1;
 import com.zssfw.oschina.ui.pager.found.fragment.ossw.DomesticFragment;
 import com.zssfw.oschina.ui.pager.found.fragment.ossw.HotFragment;
 import com.zssfw.oschina.ui.pager.found.fragment.ossw.LatestFragment;
@@ -64,7 +64,7 @@ public class OSSoftwareFragment extends BaseFragment {
         if (mFoundOSSList != null) {
             mFoundOSSList.clear();
         }
-        ClassfyFragment classfyFragment = new ClassfyFragment();
+        ClassfyFragment1 classfyFragment = new ClassfyFragment1();
         RecommendFragment recommendFragment = new RecommendFragment();
         LatestFragment latestFragment = new LatestFragment();
         HotFragment hotFragment = new HotFragment();

@@ -67,7 +67,7 @@ public class SoftWareDetailsFragment extends BaseFragment implements MyWebView.O
 
         WebSettings settings = mWebView.getSettings();
 //        settings.setJavaScriptEnabled(true);        //设置js可用
-        settings.setBuiltInZoomControls(true);      //显示缩放按钮
+//        settings.setBuiltInZoomControls(true);      //显示缩放按钮
         settings.setUseWideViewPort(true);          //支持双击缩放
 
         mWebView.setWebViewClient(new WebViewClient());

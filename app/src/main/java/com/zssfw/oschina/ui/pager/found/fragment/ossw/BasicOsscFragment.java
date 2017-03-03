@@ -1,6 +1,7 @@
 package com.zssfw.oschina.ui.pager.found.fragment.ossw;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,6 +63,7 @@ public abstract class BasicOsscFragment extends BaseFragment implements PullToRe
                 dsc.setText(bean.getDescription().get(0));
             }
         });
+        mSrl.setColorSchemeColors(Color.BLUE, Color.GREEN, Color.RED);
         mLv = mPtrl.getRefreshableView();
         mLv.setAdapter(mAdapter);
         mLv.setOnItemClickListener(new mOnItemClickListener());

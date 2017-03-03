@@ -1,9 +1,12 @@
 package com.zssfw.oschina.ui.pager.found.fragment.ossw;
 
-import android.view.LayoutInflater;
+import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -22,25 +25,22 @@ import java.util.List;
  * Created by Routee on 2017/2/24.
  */
 
-public class ClassfyFragment extends BaseFragment {
+public class ClassfyFragment1 extends BaseFragment implements AdapterView.OnItemClickListener {
+    private List<Classify1Bean.OschinaBean.SoftwareTypesBean.SoftwareTypeBean> mShowItems = new ArrayList<>();
+    private ListView    mLv;
+    private BaseAdapter mAdapter;
+    private View mView = null;
+
     @Override
     public SwipeRefreshLayout getSwipeRefreshLayout() {
         return null;
     }
 
-    private static final int                                                                FIRST         = 0;
-    private static final int                                                                SECOND        = 1;
-    private static final int                                                                THIRD         = 2;
-    private              int                                                                mCurrentLevel = FIRST;
-    private              List<Classify1Bean.OschinaBean.SoftwareTypesBean.SoftwareTypeBean> mShowItems    = new ArrayList<>();
-    private ListView    mLv;
-    private BaseAdapter mAdapter;
-
-
     @Override
     public View createView() {
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.view_found_osswview_classify1, null);
-        mLv = (ListView) view.findViewById(R.id.lv_found_ossw_classify);
+        mView = LayoutInflater.from(getContext()).inflate(R.layout.view_found_osswview_classify1, null);
+        mLv = (ListView) mView.findViewById(R.id.lv_found_ossw_classify);
+        mLv.setOnItemClickListener(this);
         mAdapter = new BaseAdapter() {
             @Override
             public int getCount() {
@@ -77,7 +77,7 @@ public class ClassfyFragment extends BaseFragment {
             }
         };
         mLv.setAdapter(mAdapter);
-        return view;
+        return mView;
     }
 
     @Override
@@ -96,5 +96,17 @@ public class ClassfyFragment extends BaseFragment {
     @Override
     public void refresh() {
 
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        ClassfyFragment2 classfyFragment = new ClassfyFragment2();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("URL", mShowItems.get(position).getTag().get(0));
+        classfyFragment.setArguments(bundle);
+        FragmentTransaction manager = getFragmentManager().beginTransaction();
+        manager.add(R.id.fl_found_ossw, classfyFragment);
+        manager.addToBackStack(null);
+        manager.commit();
     }
 }
