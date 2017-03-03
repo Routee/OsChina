@@ -126,16 +126,22 @@ public class MinePager extends BaseFragment implements View.OnClickListener {
 
         if (requestCode == 1) {
             String content = CacheManager.getInstance().getCacheData(Constant.LOGIN);
-            System.out.println(content + "9999999999999999999");
             OschinaBean bean = XmlUtil.getInstance().xmlToBean(content, OschinaBean.class);
             mData = bean;
         }
 
 
+        getLoginState();
+    }
+
+    public void getLoginState() {
         Util.runOnUIThread(new Runnable() {
             @Override
             public void run() {
                 if (SPUtil.getState()) {
+                    String content = CacheManager.getInstance().getCacheData(Constant.LOGIN);
+                    OschinaBean bean = XmlUtil.getInstance().xmlToBean(content, OschinaBean.class);
+                    mData = bean;
                     mLogout.setVisibility(View.INVISIBLE);
                     mLogin.setVisibility(View.VISIBLE);
                     mFoot.setVisibility(View.VISIBLE);
@@ -156,36 +162,11 @@ public class MinePager extends BaseFragment implements View.OnClickListener {
         });
     }
 
-
-
-
-
-  /*  @Override
+    @Override
     public void onResume() {
         super.onResume();
-        Util.runOnUIThread(new Runnable() {
-            @Override
-            public void run() {
-                if (SPUtil.getState()) {
-                    mLogout.setVisibility(View.INVISIBLE);
-                    mLogin.setVisibility(View.VISIBLE);
-                    mFoot.setVisibility(View.VISIBLE);
-                    mTvUsername.setText(mData.getUser().getName());
-                    System.out.println("性别"+mData.getUser().getGender());
-                    if (mData.getUser().getGender() ==2) {
-                        mIvSex.setImageResource(R.mipmap.userinfo_icon_female);
-                    }else{
-                        mIvSex.setImageResource(R.mipmap.userinfo_icon_male);
-                    }
-
-                }else{
-                    mLogout.setVisibility(View.VISIBLE);
-                    mLogin.setVisibility(View.INVISIBLE);
-                    mFoot.setVisibility(View.INVISIBLE);
-                }
-            }
-        });
-    }*/
+        getLoginState();
+    }
 
     public Bitmap initBitmap(String content, int width, int height){
         QRCodeWriter writer = new QRCodeWriter();

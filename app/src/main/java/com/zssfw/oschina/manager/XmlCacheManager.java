@@ -27,7 +27,8 @@ public class XmlCacheManager {
         if (TextUtils.isEmpty(content)) {
             //空的
             //3.去本地获取数据
-            content = CacheManager.getInstance().getCacheData(url);
+          //  content = CacheManager.getInstance().getCacheData(url);
+            return null;
         } else {
             //说明有
             //4.去本地保存数据

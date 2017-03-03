@@ -1,6 +1,7 @@
 package com.zssfw.oschina.manager;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -44,7 +45,9 @@ public class HttpManager {
 
     public String dataPost(String url,String username,String password) {
 
-        OkHttpClient okHttpClient = new OkHttpClient.Builder().build();
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(3000, TimeUnit.MILLISECONDS)
+                .build();
         FormBody body = new FormBody.Builder()
                 .add("keep_login","1")
                 .add("username",username)
