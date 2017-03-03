@@ -12,6 +12,7 @@ import android.view.animation.TranslateAnimation;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebViewClient;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -33,7 +34,7 @@ import com.zssfw.oschina.util.Util;
         }
  */
 
-public class SoftWareDetailsFragment extends BaseFragment implements MyWebView.OnScrollListener {
+public class SoftWareDetailsFragment extends BaseFragment implements MyWebView.OnScrollListener, View.OnClickListener {
 
     private String    mName;
     private MyWebView mWebView;
@@ -44,7 +45,8 @@ public class SoftWareDetailsFragment extends BaseFragment implements MyWebView.O
     private TextView     mTvCollect;
     private TextView     mTvShare;
     private boolean change = true;
-    private int          mHeight;
+    private int mHeight;
+    private EditText mEt;
 
     @Override
     public SwipeRefreshLayout getSwipeRefreshLayout() {
@@ -64,17 +66,17 @@ public class SoftWareDetailsFragment extends BaseFragment implements MyWebView.O
         }
         View view = LayoutInflater.from(getContext()).inflate(R.layout.found_software_view, null);
         mWebView = (MyWebView) view.findViewById(R.id.wv_found_software);
-
+        mEt = (EditText) view.findViewById(R.id.et_share);
         WebSettings settings = mWebView.getSettings();
-//        settings.setJavaScriptEnabled(true);        //设置js可用
-//        settings.setBuiltInZoomControls(true);      //显示缩放按钮
+        //        settings.setJavaScriptEnabled(true);        //设置js可用
+        //        settings.setBuiltInZoomControls(true);      //显示缩放按钮
         settings.setUseWideViewPort(true);          //支持双击缩放
 
         mWebView.setWebViewClient(new WebViewClient());
         mWebView.setWebChromeClient(new WebChromeClient());
 
 
-                mLinearLayout = (LinearLayout) view.findViewById(R.id.ll_bottom);
+        mLinearLayout = (LinearLayout) view.findViewById(R.id.ll_bottom);
         mTvComment = (TextView) view.findViewById(R.id.tv_comment);
         mTvCollect = (TextView) view.findViewById(R.id.tv_collect);
         mTvShare = (TextView) view.findViewById(R.id.tv_share);
@@ -87,6 +89,7 @@ public class SoftWareDetailsFragment extends BaseFragment implements MyWebView.O
                 mHeight = mLinearLayout.getHeight();
             }
         });
+        mLinearLayout.setOnClickListener(this);
 
         //对WebView设置监听
         mWebView.setmOnScrollListener(this);
@@ -139,6 +142,7 @@ public class SoftWareDetailsFragment extends BaseFragment implements MyWebView.O
 
             if (!show) {
                 mLinearLayout.setVisibility(View.INVISIBLE);
+                mEt.setVisibility(View.GONE);
                 initViewAnimation(mLinearLayout, false);
 
                 //顶部显示
@@ -147,6 +151,7 @@ public class SoftWareDetailsFragment extends BaseFragment implements MyWebView.O
 
             } else {
                 mLinearLayout.setVisibility(View.VISIBLE);
+                mEt.setVisibility(View.GONE);
                 initViewAnimation(mLinearLayout, true);
 
                 //顶部隐藏
@@ -214,6 +219,11 @@ public class SoftWareDetailsFragment extends BaseFragment implements MyWebView.O
         }
     }
 
+    @Override
+    public void onClick(View v) {
+        mLinearLayout.setVisibility(View.GONE);
+        mEt.setVisibility(View.VISIBLE);
+    }
 }
 
 

@@ -82,7 +82,6 @@ public class FoundPager extends BaseFragment {
                 Toast.makeText(MyApplication.mContent, "线下活动", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.ll_found_finduser:
-                Toast.makeText(MyApplication.mContent, "搜索好友", Toast.LENGTH_SHORT).show();
                 intent = new Intent(MyApplication.mContent, FoundSearchFriendActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
@@ -103,5 +102,11 @@ public class FoundPager extends BaseFragment {
                 startActivity(intent);
                 break;
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
     }
 }

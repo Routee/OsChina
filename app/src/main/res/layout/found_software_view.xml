@@ -58,6 +58,15 @@
 
 
         </LinearLayout>
+        <EditText
+            android:background="#9fff"
+            android:layout_width="match_parent"
+            android:id="@+id/et_share"
+            android:visibility="gone"
+            android:hint="评论内容"
+            android:singleLine="true"
+            android:layout_gravity="bottom"
+            android:layout_height="40dp"/>
     </FrameLayout>
 
 </LinearLayout>
