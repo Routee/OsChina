@@ -15,9 +15,6 @@ import com.zssfw.oschina.ui.pager.found.fragment.ShakeFragment;
 import com.zssfw.oschina.ui.pager.plus.BaseFragment;
 import com.zssfw.oschina.util.Constant;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import zxing.android.CaptureActivity;
 
 /**
@@ -25,19 +22,13 @@ import zxing.android.CaptureActivity;
  * 描述 ${TODO}
  */
 
-public class FoundPager extends BaseFragment {
-    @Bind(R.id.ll_found_ossoftware)
-    LinearLayout mLlFoundOssoftware;
-    @Bind(R.id.ll_found_offlineact)
-    LinearLayout mLlFoundOfflineact;
-    @Bind(R.id.ll_found_finduser)
-    LinearLayout mLlFoundFinduser;
-    @Bind(R.id.ll_found_nearfriend)
-    LinearLayout mLlFoundNearfriend;
-    @Bind(R.id.ll_found_scan)
-    LinearLayout mLlFoundScan;
-    @Bind(R.id.ll_found_shake)
-    LinearLayout mLlFoundShake;
+public class FoundPager extends BaseFragment implements View.OnClickListener {
+    private LinearLayout mLlFoundOssoftware;
+    private LinearLayout mLlFoundOfflineact;
+    private LinearLayout mLlFoundFinduser;
+    private LinearLayout mLlFoundNearfriend;
+    private LinearLayout mLlFoundScan;
+    private LinearLayout mLlFoundShake;
 
     @Override
     public SwipeRefreshLayout getSwipeRefreshLayout() {
@@ -47,7 +38,18 @@ public class FoundPager extends BaseFragment {
     @Override
     public View createView() {
         View view = View.inflate(MyApplication.mContent, R.layout.page_found, null);
-        ButterKnife.bind(FoundPager.this, view);
+        mLlFoundOssoftware = (LinearLayout) view.findViewById(R.id.ll_found_ossoftware);
+        mLlFoundOfflineact = (LinearLayout) view.findViewById(R.id.ll_found_offlineact);
+        mLlFoundFinduser = (LinearLayout) view.findViewById(R.id.ll_found_finduser);
+        mLlFoundNearfriend = (LinearLayout) view.findViewById(R.id.ll_found_nearfriend);
+        mLlFoundScan = (LinearLayout) view.findViewById(R.id.ll_found_scan);
+        mLlFoundShake = (LinearLayout) view.findViewById(R.id.ll_found_shake);
+        mLlFoundOssoftware.setOnClickListener(this);
+        mLlFoundOfflineact.setOnClickListener(this);
+        mLlFoundFinduser.setOnClickListener(this);
+        mLlFoundNearfriend.setOnClickListener(this);
+        mLlFoundScan.setOnClickListener(this);
+        mLlFoundShake.setOnClickListener(this);
         return view;
     }
 
@@ -67,7 +69,6 @@ public class FoundPager extends BaseFragment {
     }
 
 
-    @OnClick({R.id.ll_found_ossoftware, R.id.ll_found_offlineact, R.id.ll_found_finduser, R.id.ll_found_nearfriend, R.id.ll_found_scan, R.id.ll_found_shake})
     public void onClick(View view) {
         Intent intent;
         switch (view.getId()) {
