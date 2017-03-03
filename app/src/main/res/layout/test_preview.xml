@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:padding="10dp">
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Astaxie"
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:textSize="20sp"/>
+
+
+    <TextView
+        android:id="@+id/tv_span_topic"
+        android:layout_width="match_parent"
+        android:text="在新闻#凤姐整形成孙悟空#发表评论"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:textSize="18sp"
+        android:textColor="#c000"
+        android:text="就his懂啊好的死哦啊好的送啊都会死奥基迪送啊dhsia"
+        android:layout_width="match_parent"
+        android:id="@+id/tv_dsc"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="2001-01-01"
+            android:id="@+id/tv_time"
+            android:layout_height="wrap_content"/>
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/tv_comments"
+            android:drawableLeft="@mipmap/found_comment"
+            android:text="0"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</LinearLayout>

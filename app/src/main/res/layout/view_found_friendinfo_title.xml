@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:padding="30dp"
+              android:layout_height="wrap_content"
+              android:gravity="center_horizontal"
+              android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <com.zssfw.oschina.ui.pager.found.widget.CircleImageView
+            android:id="@+id/iv_avatar_title"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@mipmap/bg_my"/>
+
+        <FrameLayout
+            android:layout_gravity="end|bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/shape_circle_white"
+                android:layout_gravity="end|bottom"/>
+
+            <ImageView
+                android:layout_margin="1dp"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:id="@+id/iv_sex_title"
+                android:src="@mipmap/userinfo_icon_male"/>
+        </FrameLayout>
+    </FrameLayout>
+
+
+    <TextView
+        android:layout_margin="5dp"
+        android:id="@+id/tv_title_title"
+        android:layout_width="wrap_content"
+        android:text="astaxie"
+        android:textColor="#fff"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:id="@+id/tv_dsc_title"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:maxLines="1"
+        android:text="这个人很懒,什么都没有写"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_margin="5dp"
+        android:textColor="#fff"
+        android:textSize="18sp"
+        android:id="@+id/tv_score_title"
+        android:text="积分 387"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:background="@drawable/shape_found_friendinfo"
+        android:layout_height="wrap_content">
+        
+        <TextView
+            android:gravity="center"
+            android:layout_width="100dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="关注"
+            android:id="@+id/tv_followers_title"
+            android:textColor="#fff"
+            android:textSize="20sp"
+            android:layout_height="wrap_content"/>
+        
+        <ImageView
+            android:layout_width="1dp"
+            android:background="#fff"
+            android:layout_gravity="center_vertical"
+            android:layout_height="18dp"/>
+        
+        <TextView
+            android:gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:id="@+id/tv_fans_title"
+            android:layout_width="100dp"
+            android:text="粉丝"
+            android:maxLines="1"
+            android:textColor="#fff"
+            android:textSize="20sp"
+            android:layout_height="wrap_content"/>
+        
+        
+    </LinearLayout>
+
+</LinearLayout>

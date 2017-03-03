@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <ScrollView
+            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:orientation="vertical"
             android:scrollbars="none"
     >
@@ -80,5 +85,24 @@
             android:layout_height="match_parent">
 
         </com.zssfw.oschina.ui.widget.MyListView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/bg_gray"
+            android:padding="10dp"
+            android:text="热门评论"
+            android:id="@+id/textView_comment"/>
+
+        <com.zssfw.oschina.ui.widget.MyListView
+            android:id="@+id/listview_comment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </com.zssfw.oschina.ui.widget.MyListView>
     </LinearLayout>
-</ScrollView>
+    </ScrollView>
+
+    <include layout="@layout/comment_report_layout"/>
+</LinearLayout>
+
+

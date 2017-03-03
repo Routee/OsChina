@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="5dp"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    tools:showIn="@layout/fragment_newsdetails">
+
+    <Space
+        android:layout_weight="0.5"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"/>
+
+    <EditText
+        android:id="@+id/et_comment"
+        android:focusable="false"
+        android:hint="发表评论"
+        android:background="@drawable/shape_news_comment"
+        android:layout_weight="4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
+
+    <Space
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"/>
+
+    <Button
+        android:background="@mipmap/ic_fav_normal"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"/>
+
+    <Space
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"/>
+
+    <Button
+        android:background="@mipmap/ic_share_black_normal"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"/>
+
+    <Space
+        android:layout_weight="0.5"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"/>
+
+
+</LinearLayout>

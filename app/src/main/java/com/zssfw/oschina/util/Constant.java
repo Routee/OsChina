@@ -34,6 +34,8 @@ public class Constant {
     public static final int       SCANREQUESTCODE = 40;
     public static final String WIDTHPIXELS        = "widthpixels";
     public static final int EMOJI_LIE             = 7;
+    public static final String FRIENDDETAILS_NAME      = "FOUND_FRIEND_DETAILS_NAME";
+    public static final String FRIENDDETAILS_ID      = "FOUND_FRIEND_DETAILS_ID";
     public static  int widthpixels                = 0;
     public static String ONFILE_NAME              = "dynamicList1";
     public static int    ITEM_FRAG1               = -1;
@@ -47,6 +49,7 @@ public class Constant {
     public static final String BUNDLE_MSG_TITLE   = "bundle_msg_title";
     public static final String BUNDLE_MSG_COMMENT = "bundle_msg_comment";
     public static final String BUNDLE_MSG_ID = "bundle_msg_id";
+    public static final String BUNDLE_MSG_TYPE = "bundle_msg_type";
     public static final String BUNDLE_MSG_URL = "bundle_msg_url";
     public static final String BUNDLE             = "bundle";
     public static final String INTENT_CLASS       = "intent_class";
@@ -54,6 +57,9 @@ public class Constant {
     //----资讯
 
     public static final String   NEWS_DETAILS   = "/action/apiv2/news?id=";
+//    public static final String   NEWS_COMMENT   = "/action/apiv2/comment?parts=refer,reply&sourceId=77953&type=6";
+    public static final String   NEWS_COMMENT   = "/action/apiv2/comment?parts=refer,reply&sourceId=";
+
 
     public static int[] EMOJI  = new int[]{
             R.mipmap.smiley_0,

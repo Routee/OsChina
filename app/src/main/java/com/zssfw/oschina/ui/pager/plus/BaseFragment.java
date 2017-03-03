@@ -39,6 +39,7 @@ public abstract class BaseFragment extends Fragment {
                     return getSwipeRefreshLayout();
                 }
 
+
                 @Override
                 public Object getNetData() {
                     return getData();
@@ -87,6 +88,7 @@ public abstract class BaseFragment extends Fragment {
         bundle.putString(Constant.BUNDLE_MSG_TITLE,title );
         bundle.putInt(Constant.BUNDLE_MSG_COMMENT,comment);
         bundle.putInt(Constant.BUNDLE_MSG_ID,id);
+//        bundle.putInt(Constant.BUNDLE_MSG_TYPE,type);
 
 
         Intent intent = new Intent(getContext(), ShowActivity.class);

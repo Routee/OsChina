@@ -57,6 +57,8 @@ public class LogoutFragment extends BaseFragment implements View.OnClickListener
     @Override
     public void onClick(View view) {
         SPUtil.saveState(false);
+        String username = SPUtil.getUsername();
+        SPUtil.saveUser(username,"");
         getActivity().finish();
     }
 }

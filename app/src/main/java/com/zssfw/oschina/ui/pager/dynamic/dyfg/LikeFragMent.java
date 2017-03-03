@@ -1,20 +1,28 @@
 package com.zssfw.oschina.ui.pager.dynamic.dyfg;
 
+import android.animation.Animator;
+import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -24,6 +32,7 @@ import com.zssfw.oschina.R;
 import com.zssfw.oschina.bean.LikeBean;
 import com.zssfw.oschina.ui.widget.DyRecycleView;
 import com.zssfw.oschina.util.Constant;
+import com.zssfw.oschina.util.DensityUtil;
 
 import java.io.IOException;
 import java.util.List;
@@ -59,20 +68,108 @@ public class LikeFragMent extends DYdetailListFragment {
             }
         }
     };
+    private RelativeLayout mRl_trans;
+    private int mMeasuredHeight;
+    private ViewTreeObserver mViewTreeObserver;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.likeview, null);
+        mRl_trans = (RelativeLayout) view.findViewById(R.id.rl_trans);
         mRecyclerView = (DyRecycleView) view.findViewById(R.id.recycler_like);
+        mRl_trans.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+
+               mMeasuredHeight= mRl_trans.getHeight();
+            }
+        });
+
         return view;
     }
-
+    int start = 0;
+    int moveState = 0;
+    int height;
+    int up = 0;
+    int down =0;
+    int iscomple = 0;
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        mRecyclerView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_UP:
+                        moveState = 3;
+                        break;
+                    case MotionEvent.ACTION_DOWN:
+                        moveState = 1;
+                        break;
+                    case MotionEvent.ACTION_HOVER_MOVE:
+                        moveState = 2;
+                        break;
+                }
+                return false;
+            }
+        });
+        height = (int) DensityUtil.dip2px(getActivity(),48);
+        System.out.println("sssssssssss"+height);
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                LinearLayoutManager layoutManager = (LinearLayoutManager) mRecyclerView.getLayoutManager();
+                int lastVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
+                if (layoutManager.findFirstVisibleItemPosition() == 0) {
+                    ViewCompat.animate(mRl_trans).translationY(0).start();
+                } else {
+                    ViewCompat.animate(mRl_trans).translationYBy((mMeasuredHeight)).start();
+                }
+            }
+
+
+        });
         initData();
     }
+    private void startAnimation(int i, int height) {
+        final ValueAnimator valueAnimator = ValueAnimator.ofFloat(i, height);
+        System.out.println("current value :"+i+"--->"+height);
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                float animatedValue = (float) animation.getAnimatedValue();
+                System.out.println("move to :"+animatedValue);
+                mRl_trans.setTranslationY(animatedValue);
+            }
+        });
 
+        valueAnimator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                iscomple =1;
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                iscomple = 0;
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+        valueAnimator.start();
+    }
     private void initData() {
         String uri = "http://www.oschina.net/action/apiv2/tweet_likes?sourceId="+Constant.ITEM_FRAG;
 

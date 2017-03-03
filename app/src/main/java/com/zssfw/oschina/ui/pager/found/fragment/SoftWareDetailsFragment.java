@@ -1,21 +1,24 @@
 package com.zssfw.oschina.ui.pager.found.fragment;
 
-import android.animation.ValueAnimator;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.webkit.WebView;
+import android.view.ViewTreeObserver;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zssfw.oschina.R;
 import com.zssfw.oschina.manager.JsonCacheManager;
 import com.zssfw.oschina.ui.pager.found.bean.SoftWareBean;
+import com.zssfw.oschina.ui.pager.found.widget.MyWebView;
 import com.zssfw.oschina.ui.pager.plus.BaseFragment;
 import com.zssfw.oschina.util.Constant;
 import com.zssfw.oschina.util.Util;
@@ -30,19 +33,18 @@ import com.zssfw.oschina.util.Util;
         }
  */
 
-public class SoftWareDetailsFragment extends BaseFragment implements View.OnTouchListener {
+public class SoftWareDetailsFragment extends BaseFragment implements MyWebView.OnScrollListener {
 
-    private String  mName;
-    private WebView mWebView;
+    private String    mName;
+    private MyWebView mWebView;
     boolean isBlog = false;
     private String       mNewUrl;
     private LinearLayout mLinearLayout;
     private TextView     mTvComment;
     private TextView     mTvCollect;
     private TextView     mTvShare;
-    private GestureDetector mDetector;
-    private ValueAnimator mVAnim;
-    private int mHeight;
+    private boolean change = true;
+    private int          mHeight;
 
     @Override
     public SwipeRefreshLayout getSwipeRefreshLayout() {
@@ -61,14 +63,34 @@ public class SoftWareDetailsFragment extends BaseFragment implements View.OnTouc
             mName = info.substring(5);
         }
         View view = LayoutInflater.from(getContext()).inflate(R.layout.found_software_view, null);
-        mWebView = (WebView) view.findViewById(R.id.wv_found_software);
-        mLinearLayout = (LinearLayout) view.findViewById(R.id.ll_bottom);
-        mHeight = mLinearLayout.getHeight();
+        mWebView = (MyWebView) view.findViewById(R.id.wv_found_software);
+
+        WebSettings settings = mWebView.getSettings();
+//        settings.setJavaScriptEnabled(true);        //设置js可用
+        settings.setBuiltInZoomControls(true);      //显示缩放按钮
+        settings.setUseWideViewPort(true);          //支持双击缩放
+
+        mWebView.setWebViewClient(new WebViewClient());
+        mWebView.setWebChromeClient(new WebChromeClient());
+
+
+                mLinearLayout = (LinearLayout) view.findViewById(R.id.ll_bottom);
         mTvComment = (TextView) view.findViewById(R.id.tv_comment);
         mTvCollect = (TextView) view.findViewById(R.id.tv_collect);
         mTvShare = (TextView) view.findViewById(R.id.tv_share);
-        mDetector = new GestureDetector(new GestureListener());
-        mWebView.setOnTouchListener(this);
+
+        //获取mLinearLayout高度信息
+        mLinearLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                mLinearLayout.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                mHeight = mLinearLayout.getHeight();
+            }
+        });
+
+        //对WebView设置监听
+        mWebView.setmOnScrollListener(this);
+
         if (!isBlog) {
             new Thread(new Runnable() {
                 @Override
@@ -100,35 +122,6 @@ public class SoftWareDetailsFragment extends BaseFragment implements View.OnTouc
         return view;
     }
 
-    //显示底部布局
-    private void showBottom() {
-        /*mVAnim = ValueAnimator.ofInt(mHeight, 0).setDuration(800);
-        mVAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                int currentValue = (int) animation.getAnimatedValue();
-                mLinearLayout.setPadding(0,currentValue,0,0);
-            }
-        });
-        mVAnim.start();*/
-        showToast("显示bottom");
-    }
-
-    //隐藏底部布局
-    private void hideBottom() {
-        /*mVAnim = ValueAnimator.ofInt(0, mHeight).setDuration(800);
-        mVAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                int currentValue = (int) animation.getAnimatedValue();
-                mLinearLayout.setPadding(0,currentValue,0,0);
-            }
-        });
-        mVAnim.start();*/
-        showToast("隐藏bottom");
-    }
-
-
     @Override
     public Object getData() {
 
@@ -141,55 +134,87 @@ public class SoftWareDetailsFragment extends BaseFragment implements View.OnTouc
     }
 
     @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        return mDetector.onTouchEvent(event);
-    }
+    public void showOrHide(boolean show) {
+        if (change != show) {
 
-    private class GestureListener implements GestureDetector.OnGestureListener {
-        //手指下滑
-        @Override
-        public boolean onDown(MotionEvent e) {
-            return false;
-        }
+            if (!show) {
+                mLinearLayout.setVisibility(View.INVISIBLE);
+                initViewAnimation(mLinearLayout, false);
 
-        //按下一小段事件但是没有滑动
-        @Override
-        public void onShowPress(MotionEvent e) {
+                //顶部显示
+                //          top_bar_.setVisibility(View.VISIBLE);
+                //          ConstantUtils.initViewAnimation1(top_bar_,true,true);
 
-        }
-
-        //轻触
-        @Override
-        public boolean onSingleTapUp(MotionEvent e) {
-            return false;
-        }
-
-        //滑动
-        @Override
-        public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-            //像下滑动
-            if (distanceY > 0) {
-                // TODO: 2017/2/27  隐藏mLineLayout
-                hideBottom();
-                return true;
             } else {
-                showBottom();
-                return true;
+                mLinearLayout.setVisibility(View.VISIBLE);
+                initViewAnimation(mLinearLayout, true);
+
+                //顶部隐藏
+                //          top_bar_.setVisibility(View.INVISIBLE);
+                //          ConstantUtils.initViewAnimation1(top_bar_,false,true);
             }
-        }
-
-        //长按
-        @Override
-        public void onLongPress(MotionEvent e) {
-
-        }
-
-        //飞一样的滑动
-        @Override
-        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            return false;
+            change = show;
         }
     }
 
+    @Override
+    public void onScrolled(int l, int t, int oldl, int oldt) {
+        //WebView的总高度
+        float webViewContentHeight = mWebView.getContentHeight() * mWebView.getScale();
+        //WebView的现高度
+        float webViewCurrentHeight = (mWebView.getHeight() + mWebView.getScrollY());
+        if ((webViewContentHeight - webViewCurrentHeight) < 10) {
+            mLinearLayout.setVisibility(View.VISIBLE);
+            initViewAnimation(mLinearLayout, true);
+        } else {
+        }
+    }
+
+    private void initViewAnimation(final LinearLayout showView, boolean isshow) {
+        float[] up2down;
+
+        float[] down2up;
+
+
+        up2down = new float[]{0f, 1f};
+        down2up = new float[]{1f, 0f};
+
+
+        if (isshow) {
+            TranslateAnimation mShowAction = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0.0f,
+                    Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF,
+                    down2up[0], Animation.RELATIVE_TO_SELF, down2up[1]);
+            mShowAction.setDuration(500);
+            showView.clearAnimation();
+            showView.startAnimation(mShowAction);
+        } else {
+            TranslateAnimation mHiddenAction = new TranslateAnimation(Animation.RELATIVE_TO_SELF,
+                    0.0f, Animation.RELATIVE_TO_SELF, 0.0f,
+                    Animation.RELATIVE_TO_SELF, up2down[0], Animation.RELATIVE_TO_SELF, up2down[1]);
+            mHiddenAction.setDuration(500);
+            mHiddenAction.setAnimationListener(new Animation.AnimationListener() {
+
+                @Override
+                public void onAnimationStart(Animation animation) {
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    showView.setVisibility(View.GONE);
+                    showView.invalidate();
+                }
+            });
+
+            showView.clearAnimation();
+            showView.startAnimation(mHiddenAction);
+        }
+    }
 
 }
+
+
+    
