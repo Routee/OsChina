@@ -83,13 +83,28 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
             });
 
         }
+     /*   ConnectivityManager manager = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = manager.getActiveNetworkInfo();
+        System.out.println("网络状态"+activeNetworkInfo);
+        if(activeNetworkInfo == null){
+            mMessage = "亲,你好像没有联网哦";
+        }else{*/
 
-        OschinaBean oschinaBean = XmlCacheManager.getInstance().getXmlBean(Constant.LOGIN, username, psw, OschinaBean.class);
-        mMessage = oschinaBean.getResult().getErrorMessage();
+            OschinaBean oschinaBean = XmlCacheManager.getInstance().getXmlBean(Constant.LOGIN, username, psw, OschinaBean.class);
+            if(oschinaBean == null){
+                mMessage = "网络好像出问题了啊";
+            }else{
+                mMessage = oschinaBean.getResult().getErrorMessage();
+            }
+
+
+     /*   if (oschinaBean == null){
+            mMessage = "亲,你好像没有联网哦";
+        }else{
+        }*/
         Util.runOnUIThread(new Runnable() {
             @Override
             public void run() {
-
                 if (TextUtils.equals(mMessage,"登录成功")) {
                     isLogin = true;
                     SPUtil.saveState(isLogin);
@@ -103,9 +118,4 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
         });
 
     }
-
-
-
-
-
 }
