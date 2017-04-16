@@ -10,8 +10,6 @@
     <uses-permission android:name="android.permission.FLASHLIGHT"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
-
-
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -22,8 +20,10 @@
         <activity android:name=".ui.act.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+                <action android:name="com.zssfw.oschina.main"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
         <activity android:name=".ui.act.FoundShowActivity"/>
@@ -56,6 +56,8 @@
             android:theme="@style/like_dialog">
         </activity>
         <activity android:name=".ui.act.ReportCommentActivity">
+        </activity>
+        <activity android:name=".manager.Main2Activity">
         </activity>
     </application>
 

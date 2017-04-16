@@ -20,6 +20,5 @@ public class MyApplication extends Application {
         super.onCreate();
         mContent = this;
         mHandler = new Handler();
-
     }
 }

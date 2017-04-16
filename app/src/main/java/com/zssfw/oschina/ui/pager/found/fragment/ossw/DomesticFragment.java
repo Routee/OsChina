@@ -22,5 +22,6 @@ import com.zssfw.oschina.util.Uris;
     public SwipeRefreshLayout getSwipeRefreshLayout() {
         return null;
     }
+
 }
 

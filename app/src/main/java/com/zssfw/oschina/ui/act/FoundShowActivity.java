@@ -10,7 +10,10 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.zssfw.oschina.R;
+import com.zssfw.oschina.interfaces.OsscClassyfyFrag;
 import com.zssfw.oschina.util.Constant;
+
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -63,5 +66,17 @@ public class FoundShowActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         onBackPressed();
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        List<Fragment> fragments = getSupportFragmentManager().getFragments();
+        Fragment fragment = fragments.get(fragments.size() - 1);
+        if (!(fragment instanceof OsscClassyfyFrag)){
+            finish();
+        } else {
+            super.onBackPressed();
+        }
+
     }
 }

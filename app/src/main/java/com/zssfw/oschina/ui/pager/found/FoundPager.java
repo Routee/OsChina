@@ -1,6 +1,7 @@
 package com.zssfw.oschina.ui.pager.found;
 
 import android.content.Intent;
+import android.provider.MediaStore;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -80,7 +81,10 @@ public class FoundPager extends BaseFragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.ll_found_offlineact:
-                Toast.makeText(MyApplication.mContent, "线下活动", Toast.LENGTH_SHORT).show();
+                intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+                getActivity().startActivity(intent);
+                Toast.makeText(MyApplication.mContent, "打开相机", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.ll_found_finduser:
                 intent = new Intent(MyApplication.mContent, FoundSearchFriendActivity.class);
@@ -88,7 +92,9 @@ public class FoundPager extends BaseFragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.ll_found_nearfriend:
-                Toast.makeText(MyApplication.mContent, "附近程序员", Toast.LENGTH_SHORT).show();
+                intent = new Intent("android.intent.action.GET_CONTENT");
+                intent.setType("image/*");
+                startActivity(intent);
                 break;
             case R.id.ll_found_scan:
                 intent = new Intent(MyApplication.mContent, CaptureActivity.class);

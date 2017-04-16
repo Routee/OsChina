@@ -144,4 +144,6 @@ public abstract class BasicOsscFragment extends BaseFragment implements PullToRe
             startActivity(intent);
         }
     }
+
+
 }

@@ -96,7 +96,8 @@ public class FoundFriendInfoItemView extends RecyclerView.ViewHolder {
         if (bean.getCatalog().get(0).equals("0")) {
             mTvDsc.setText("加入了开源中国...");
         } else {
-            mTvDsc.setText(bean.getMessage().get(0));
+            SpannableString string = new SpannableString(bean.getMessage().get(0));
+            mTvDsc.setText(string);
         }
         mTvTime.setText(bean.getPubDate().get(0).split(" ")[0]);
         mTvComments.setText(bean.getCommentCount().get(0) + "");

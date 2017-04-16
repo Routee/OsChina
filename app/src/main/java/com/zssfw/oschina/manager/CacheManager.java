@@ -88,7 +88,7 @@ public class CacheManager {
         //存在sd 卡包名下的cache目录下
         //File.separator跨平台的
         //有时候有些api在某些手机型号上面不能用,怎么处理,可以去判断当手操作系统型号
-        FileOutputStream fileOutputStream =null;
+        FileOutputStream fileOutputStream = null;
 
         try {
             File file = new File(dir, getFileName(url));
@@ -124,7 +124,7 @@ public class CacheManager {
         //md5
         try {
 
-            MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+            MessageDigest messageDigest = MessageDigest.getInstance("md5");
             //把对应的数据传入
             messageDigest.update(url.getBytes());
 

@@ -3,11 +3,13 @@ package com.zssfw.oschina.ui.pager.found.fragment.ossw;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 
+import com.zssfw.oschina.interfaces.OsscClassyfyFrag;
+
 /**
  * Created by Routee on 2017/3/3.
  */
 
-public class ClassfyFragment3 extends BasicOsscFragment {
+public class ClassfyFragment3 extends BasicOsscFragment implements OsscClassyfyFrag {
     @Override
     public void setUrl() {
         Bundle arguments = getArguments();

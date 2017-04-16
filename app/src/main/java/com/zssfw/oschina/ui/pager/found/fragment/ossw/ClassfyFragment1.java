@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.zssfw.oschina.R;
+import com.zssfw.oschina.interfaces.OsscClassyfyFrag;
 import com.zssfw.oschina.ui.pager.found.bean.Classify1Bean;
 import com.zssfw.oschina.ui.pager.found.manager.XmlCacheTool;
 import com.zssfw.oschina.ui.pager.plus.BaseFragment;
@@ -25,7 +26,7 @@ import java.util.List;
  * Created by Routee on 2017/2/24.
  */
 
-public class ClassfyFragment1 extends BaseFragment implements AdapterView.OnItemClickListener {
+public class ClassfyFragment1 extends BaseFragment implements AdapterView.OnItemClickListener,OsscClassyfyFrag {
     private List<Classify1Bean.OschinaBean.SoftwareTypesBean.SoftwareTypeBean> mShowItems = new ArrayList<>();
     private ListView    mLv;
     private BaseAdapter mAdapter;
@@ -105,7 +106,7 @@ public class ClassfyFragment1 extends BaseFragment implements AdapterView.OnItem
         bundle.putSerializable("URL", mShowItems.get(position).getTag().get(0));
         classfyFragment.setArguments(bundle);
         FragmentTransaction manager = getFragmentManager().beginTransaction();
-        manager.add(R.id.fl_found_ossw, classfyFragment);
+        manager.replace(R.id.fl_found_ossw, classfyFragment);
         manager.addToBackStack(null);
         manager.commit();
     }
